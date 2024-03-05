@@ -1,2 +1,4 @@
-package com.hotel;public class RentingManager {
+package com.hotel;
+
+public class RentingManager {
 }
