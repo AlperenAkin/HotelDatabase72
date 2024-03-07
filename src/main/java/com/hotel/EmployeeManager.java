@@ -1,2 +1,4 @@
-package com.hotel;public class EmployeeManager {
+package com.hotel;
+
+public class EmployeeManager {
 }

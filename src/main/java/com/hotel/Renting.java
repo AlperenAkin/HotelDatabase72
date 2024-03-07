@@ -5,12 +5,12 @@ public class Renting {
     private int renting_ID;
     private int room_number;
     private String hotel_address;
-    private LocalDate from_date;
-    private LocalDate to_date;
+    private String from_date;
+    private String to_date;
     private int customer_id;
 
     // Constructor
-    public Renting(int renting_ID, int room_number, String hotel_address, LocalDate from_date, LocalDate to_date, int customer_id) {
+    public Renting(int renting_ID, int room_number, String hotel_address, String from_date, String to_date, int customer_id) {
         this.renting_ID = renting_ID;
         this.room_number = room_number;
         this.hotel_address = hotel_address;
@@ -32,11 +32,11 @@ public class Renting {
         return hotel_address;
     }
 
-    public LocalDate getFromDate() {
+    public String getFromDate() {
         return from_date;
     }
 
-    public LocalDate getToDate() {
+    public String getToDate() {
         return to_date;
     }
 
@@ -57,11 +57,11 @@ public class Renting {
         this.hotel_address = hotel_address;
     }
 
-    public void setFromDate(LocalDate from_date) {
+    public void setFromDate(String from_date) {
         this.from_date = from_date;
     }
 
-    public void setToDate(LocalDate to_date) {
+    public void setToDate(String to_date) {
         this.to_date = to_date;
     }
 

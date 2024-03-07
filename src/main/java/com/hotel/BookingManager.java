@@ -11,11 +11,11 @@ public class BookingManager {
     public List<Booking> getBookings() throws Exception {
 
         // sql query
-        String sql = "SELECT * FROM bookings";
+        String sql = "SELECT * FROM booking";
         // connection object
         ConnectionDB db = new ConnectionDB();
 
-        // data structure to keep all students retrieved from database
+        // data structure to keep all bookings retrieved from database
         List<Booking> bookings = new ArrayList<Booking>();
 
 
@@ -38,7 +38,7 @@ public class BookingManager {
                         rs.getInt("customer_id")
                 );
 
-                // append student in students list
+                // append booking in booking list
                 bookings.add(booking);
             }
 
@@ -71,9 +71,7 @@ public class BookingManager {
 
 
         // sql query
-        String insertStudentQuery = "INSERT INTO booking (name, surname, email) VALUES (?, ?, ?, ?, ?, ?, ?);";
-        // "INSERT INTO students (name, surname, email) VALUES (" + student.getName().toString() +
-//        ", " + student.getSurname() ...."
+        String insertStudentQuery = "INSERT INTO booking (booking_id, room_number, hotel_address, from_date, to_date, customer_id) VALUES (?, ?, ?, ?, ?, ?);";
 
         // try connect to database, catch any exceptions
         try {
@@ -83,9 +81,12 @@ public class BookingManager {
             PreparedStatement stmt = con.prepareStatement(insertStudentQuery);
 
             // set every ? of statement
-            stmt.setString(1, student.getName());
-            stmt.setString(2, student.getSurname());
-            stmt.setString(3, student.getEmail());
+            stmt.setInt(1, booking.getBookingId());
+            stmt.setInt(2, booking.getRoomNumber());
+            stmt.setString(3, booking.getHotelAddress());
+            stmt.setString(4, booking.getFromDate());
+            stmt.setString(5, booking.getToDate());
+            stmt.setInt(6, booking.getCustomerId());
 
             // execute the query
             int output = stmt.executeUpdate();
@@ -96,11 +97,11 @@ public class BookingManager {
             // close the connection
             db.close();
         } catch (Exception e) {
-            message = "Error while inserting customer: " + e.getMessage();
+            message = "Error while inserting booking: " + e.getMessage();
         } finally {
             if (con != null) // if connection is still open, then close.
                 con.close();
-            if (message.equals("")) message = "Student successfully inserted!";
+            if (message.equals("")) message = "Booking successfully inserted!";
 
         }
 
@@ -108,20 +109,13 @@ public class BookingManager {
         return message;
     }
 
-    /**
-     * Method to update student
-     *
-     * @param student student to be updated
-     * @return string returned that states if the grade deleted or not
-     * @throws Exception when trying to connect to database
-     */
+
     public String updateBooking(Booking booking) throws Exception {
         Connection con = null;
         String message = "";
 
         // sql query
-        String sql = "UPDATE booking SET name=?, surname=?, email=? WHERE id=?;";
-//        "UPDATE students SET name=" + student.getName().toString() +", surname=" +
+        String sql = "UPDATE booking SET room_number=?, hotel_address=?, from_date=?, to_date=?, customer_Id=? WHERE booking_id=?;";
 
         // connection object
         ConnectionDB db = new ConnectionDB();
@@ -135,10 +129,11 @@ public class BookingManager {
             PreparedStatement stmt = con.prepareStatement(sql);
 
             // set every ? of statement
-            stmt.setString(1, student.getName());
-            stmt.setString(2, student.getSurname());
-            stmt.setString(3, student.getEmail());
-            stmt.setInt(4, student.getId());
+            stmt.setInt(1, booking.getRoomNumber());
+            stmt.setString(2, booking.getHotelAddress());
+            stmt.setString(3, booking.getFromDate());
+            stmt.setString(4, booking.getToDate());
+            stmt.setInt(5, booking.getCustomerId());
 
             // execute the query
             stmt.executeUpdate();
@@ -147,11 +142,11 @@ public class BookingManager {
             stmt.close();
 
         } catch (Exception e) {
-            message = "Error while updating student: " + e.getMessage();
+            message = "Error while updating booking: " + e.getMessage();
 
         } finally {
             if (con != null) con.close();
-            if (message.equals("")) message = "Student successfully updated!";
+            if (message.equals("")) message = "Booking successfully updated!";
         }
 
         // return respective message

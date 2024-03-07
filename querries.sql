@@ -67,11 +67,59 @@ INSERT INTO Hotel (address, stars, contact_email, num_rooms, hotel_chain_name) V
 ('808 Chemin du Roy, Quebec City, QC', 3, 'heritage@frenchcharmhotels.com', 75, 'French Charm Hotels');
 
 --ROOMS (5 for each hotel, soo 200 rooms total)
-INSERT INTO Room (hotel_address, room_number, price, capacity, view, extendable) VALUES
 --Pacific Coast Inns Rooms
+INSERT INTO Room (hotel_address, room_number, price, capacity, view, extendable) VALUES
 ('101 Ocean Drive, Victoria, BC', 101, 150.00, 2, 'Sea View', TRUE),
-('101 Ocean Drive, Victoria, BC', 102, 200.00, 4, 'Mountain View', FALSE),
+('101 Ocean Drive, Victoria, BC', 102, 200.00, 6, 'Mountain View', FALSE),
 ('101 Ocean Drive, Victoria, BC', 103, 250.00, 3, 'City View', TRUE),
 ('101 Ocean Drive, Victoria, BC', 104, 300.00, 4, 'Garden View', FALSE),
 ('101 Ocean Drive, Victoria, BC', 105, 350.00, 5, 'Sea View', TRUE);
+('202 Seaside Blvd, Tofino, BC', 1, 150.00, 2, 'Sea View', TRUE),
+('202 Seaside Blvd, Tofino, BC', 2, 200.00, 6, 'Mountain View', FALSE),
+('202 Seaside Blvd, Tofino, BC', 3, 250.00, 3, 'City View', TRUE),
+('202 Seaside Blvd, Tofino, BC', 4, 300.00, 4, 'Garden View', FALSE),
+('202 Seaside Blvd, Tofino, BC', 5, 350.00, 5, 'Sea View', TRUE);
+('303 Coastal Road, Prince Rupert, BC', 10, 150.00, 2, 'Sea View', TRUE),
+('303 Coastal Road, Prince Rupert, BC', 12, 200.00, 6, 'Mountain View', FALSE),
+('303 Coastal Road, Prince Rupert, BC', 13, 250.00, 3, 'City View', TRUE),
+('303 Coastal Road, Prince Rupert, BC', 14, 300.00, 4, 'Garden View', FALSE),
+('303 Coastal Road, Prince Rupert, BC', 15, 350.00, 5, 'Sea View', TRUE);
+('404 Beachfront Ave, Nanaimo, BC', 20, 150.00, 2, 'Sea View', TRUE),
+('404 Beachfront Ave, Nanaimo, BC', 22, 200.00, 6, 'Mountain View', FALSE),
+('404 Beachfront Ave, Nanaimo, BC', 23, 250.00, 3, 'City View', TRUE),
+('404 Beachfront Ave, Nanaimo, BC', 24, 300.00, 4, 'Garden View', FALSE),
+('404 Beachfront Ave, Nanaimo, BC', 25, 350.00, 5, 'Sea View', TRUE);
+('505 Harbour Lane, Vancouver, BC', 20, 150.00, 2, 'Sea View', TRUE),
+('505 Harbour Lane, Vancouver, BC', 22, 200.00, 6, 'Mountain View', FALSE),
+('505 Harbour Lane, Vancouver, BC', 23, 250.00, 3, 'City View', TRUE),
+('505 Harbour Lane, Vancouver, BC', 24, 300.00, 4, 'Garden View', FALSE),
+('505 Harbour Lane, Vancouver, BC', 25, 350.00, 5, 'Sea View', TRUE);
+('606 Harbor View, Sidney, BC', 30, 150.00, 2, 'Sea View', TRUE),
+('606 Harbor View, Sidney, BC', 32, 200.00, 6, 'Mountain View', FALSE),
+('606 Harbor View, Sidney, BC', 33, 250.00, 3, 'City View', TRUE),
+('606 Harbor View, Sidney, BC', 34, 300.00, 4, 'Garden View', FALSE),
+('606 Harbor View, Sidney, BC', 35, 350.00, 5, 'Sea View', TRUE);
+('707 Oceanfront Walk, Powell River, BC', 40, 150.00, 2, 'Sea View', TRUE),
+('707 Oceanfront Walk, Powell River, BC', 42, 200.00, 6, 'Mountain View', FALSE),
+('707 Oceanfront Walk, Powell River, BC', 43, 250.00, 3, 'City View', TRUE),
+('707 Oceanfront Walk, Powell River, BC', 44, 300.00, 4, 'Garden View', FALSE),
+('707 Oceanfront Walk, Powell River, BC', 45, 350.00, 5, 'Sea View', TRUE);
+('808 Seashore Drive, Port Hardy, BC', 101, 100.00, 1, 'Street View', FALSE),
+('808 Seashore Drive, Port Hardy, BC', 102, 150.00, 2, 'Garden View', FALSE),
+('808 Seashore Drive, Port Hardy, BC', 103, 200.00, 5, 'Sea View', TRUE),
+('808 Seashore Drive, Port Hardy, BC', 104, 250.00, 3, 'Sea View', TRUE),
+('808 Seashore Drive, Port Hardy, BC', 105, 300.00, 4, 'Panoramic Sea View', TRUE),
+--French Charm Hotel Rooms
+INSERT INTO Room (hotel_address, room_number, price, capacity, view, extendable) VALUES
+('101 Rue de la Montagne, Montreal, QC', 501, 150.00, 1, 'City View', FALSE),
+('101 Rue de la Montagne, Montreal, QC', 502, 200.00, 2, 'City View', FALSE),
+('101 Rue de la Montagne, Montreal, QC', 503, 250.00, 5, 'Park View', TRUE),
+('101 Rue de la Montagne, Montreal, QC', 504, 300.00, 3, 'Mountain View', TRUE),
+('101 Rue de la Montagne, Montreal, QC', 505, 350.00, 4, 'Panoramic City View', TRUE);
+
+
+
+
+
+
 
