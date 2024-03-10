@@ -83,7 +83,7 @@ INSERT INTO Room (hotel_address, room_number, price, capacity, view, extendable)
 ('303 Coastal Road, Prince Rupert, BC', 12, 200.00, 6, 'Mountain View', FALSE),
 ('303 Coastal Road, Prince Rupert, BC', 13, 250.00, 3, 'City View', TRUE),
 ('303 Coastal Road, Prince Rupert, BC', 14, 300.00, 4, 'Garden View', FALSE),
-('303 Coastal Road, Prince Rupert, BC', 15, 350.00, 5, 'Sea View', TRUE);
+('303 Coastal Road, Prince Rupert, BC', 15, 350.00, 5, 'Sea View', TRUE),
 ('404 Beachfront Ave, Nanaimo, BC', 20, 150.00, 2, 'Sea View', TRUE),
 ('404 Beachfront Ave, Nanaimo, BC', 22, 200.00, 6, 'Mountain View', FALSE),
 ('404 Beachfront Ave, Nanaimo, BC', 23, 250.00, 3, 'City View', TRUE),
@@ -165,34 +165,34 @@ INSERT INTO Room (hotel_address, room_number, price, capacity, view, extendable)
 ('202 Summit Drive, Jasper, AB', 203, 300.00, 5, 'Forest View', FALSE),
 ('202 Summit Drive, Jasper, AB', 204, 325.00, 3, 'Mountain View', TRUE),
 ('202 Summit Drive, Jasper, AB', 205, 350.00, 4, 'City View', FALSE),
-('303 Ridge Road, Canmore, AB', 301, 200.00, 2, 'Mountain View', TRUE),
+('303 Ridge Road, Canmore, AB', 301, 200.00, 1, 'Mountain View', TRUE),
 ('303 Ridge Road, Canmore, AB', 302, 220.00, 2, 'Forest View', FALSE),
 ('303 Ridge Road, Canmore, AB', 303, 250.00, 3, 'Lake View', TRUE),
-('303 Ridge Road, Canmore, AB', 304, 275.00, 4, 'Mountain View', FALSE),
+('303 Ridge Road, Canmore, AB', 304, 275.00, 5, 'Mountain View', FALSE),
 ('303 Ridge Road, Canmore, AB', 305, 300.00, 4, 'City View', TRUE),
 ('404 Mountain Trail, Revelstoke, BC', 401, 210.00, 1, 'Forest View', FALSE),
 ('404 Mountain Trail, Revelstoke, BC', 402, 230.00, 2, 'Mountain View', TRUE),
-('404 Mountain Trail, Revelstoke, BC', 403, 250.00, 2, 'Lake View', FALSE),
+('404 Mountain Trail, Revelstoke, BC', 403, 250.00, 5, 'Lake View', FALSE),
 ('404 Mountain Trail, Revelstoke, BC', 404, 270.00, 3, 'City View', TRUE),
 ('404 Mountain Trail, Revelstoke, BC', 405, 290.00, 4, 'Forest View', FALSE),
 ('505 Forest Parkway, Whistler, BC', 501, 220.00, 1, 'Mountain View', FALSE),
 ('505 Forest Parkway, Whistler, BC', 502, 240.00, 2, 'Forest View', TRUE),
 ('505 Forest Parkway, Whistler, BC', 503, 260.00, 3, 'Lake View', FALSE),
-('505 Forest Parkway, Whistler, BC', 504, 280.00, 4, 'City View', TRUE),
+('505 Forest Parkway, Whistler, BC', 504, 280.00, 5, 'City View', TRUE),
 ('505 Forest Parkway, Whistler, BC', 505, 300.00, 4, 'Forest View', FALSE),
 ('909 Valley Road, Kananaskis, AB', 601, 230.00, 2, 'Mountain View', FALSE),
-('909 Valley Road, Kananaskis, AB', 602, 250.00, 2, 'Forest View', TRUE),
+('909 Valley Road, Kananaskis, AB', 602, 250.00, 1, 'Forest View', TRUE),
 ('909 Valley Road, Kananaskis, AB', 603, 270.00, 3, 'Lake View', FALSE),
-('909 Valley Road, Kananaskis, AB', 604, 290.00, 4, 'Valley View', TRUE),
+('909 Valley Road, Kananaskis, AB', 604, 290.00, 5, 'Valley View', TRUE),
 ('909 Valley Road, Kananaskis, AB', 605, 310.00, 4, 'Forest View', FALSE),
 ('1010 Highland Ave, Fernie, BC', 701, 240.00, 1, 'Mountain View', FALSE),
 ('1010 Highland Ave, Fernie, BC', 702, 260.00, 2, 'Forest View', TRUE),
-('1010 Highland Ave, Fernie, BC', 703, 280.00, 2, 'Lake View', FALSE),
+('1010 Highland Ave, Fernie, BC', 703, 280.00, 5, 'Lake View', FALSE),
 ('1010 Highland Ave, Fernie, BC', 704, 300.00, 3, 'Valley View', TRUE),
 ('1010 Highland Ave, Fernie, BC', 705, 320.00, 4, 'Forest View', FALSE),
 ('1111 Mountain View, Kimberley, BC', 801, 250.00, 1, 'Mountain View', FALSE),
 ('1111 Mountain View, Kimberley, BC', 802, 270.00, 2, 'Forest View', TRUE),
-('1111 Mountain View, Kimberley, BC', 803, 290.00, 2, 'Lake View', FALSE),
+('1111 Mountain View, Kimberley, BC', 803, 290.00, 5, 'Lake View', FALSE),
 ('1111 Mountain View, Kimberley, BC', 804, 310.00, 3, 'City View', TRUE),
 ('1111 Mountain View, Kimberley, BC', 805, 330.00, 4, 'Mountain View', FALSE);
 
@@ -202,85 +202,144 @@ INSERT INTO Room (hotel_address, room_number, price, capacity, view, extendable)
 ('101 Aurora Street, Whitehorse, YT', 902, 280.00, 2, 'Mountain View', TRUE),
 ('101 Aurora Street, Whitehorse, YT', 903, 300.00, 3, 'Forest View', FALSE),
 ('101 Aurora Street, Whitehorse, YT', 904, 320.00, 4, 'Lake View', TRUE),
-('101 Aurora Street, Whitehorse, YT', 905, 340.00, 4, 'City View', FALSE),
+('101 Aurora Street, Whitehorse, YT', 905, 340.00, 5, 'City View', FALSE),
 ('202 Polar Road, Yellowknife, NT', 1001, 270.00, 1, 'City View', FALSE),
 ('202 Polar Road, Yellowknife, NT', 1002, 290.00, 2, 'Mountain View', TRUE),
 ('202 Polar Road, Yellowknife, NT', 1003, 310.00, 3, 'Forest View', FALSE),
 ('202 Polar Road, Yellowknife, NT', 1004, 330.00, 4, 'Lake View', TRUE),
-('202 Polar Road, Yellowknife, NT', 1005, 350.00, 4, 'City View', FALSE),
+('202 Polar Road, Yellowknife, NT', 1005, 350.00, 5, 'City View', FALSE),
 ('303 Iceberg Lane, Iqaluit, NU', 1101, 280.00, 1, 'City View', FALSE),
-('303 Iceberg Lane, Iqaluit, NU', 1102, 300.00, 2, 'Mountain View', TRUE),
+('303 Iceberg Lane, Iqaluit, NU', 1102, 300.00, 5, 'Mountain View', TRUE),
 ('303 Iceberg Lane, Iqaluit, NU', 1103, 320.00, 2, 'Forest View', FALSE),
 ('303 Iceberg Lane, Iqaluit, NU', 1104, 340.00, 3, 'Lake View', TRUE),
 ('303 Iceberg Lane, Iqaluit, NU', 1105, 360.00, 4, 'City View', FALSE),
 ('404 Northern Ave, Edmonton, AB', 1201, 290.00, 1, 'City View', FALSE),
 ('404 Northern Ave, Edmonton, AB', 1202, 310.00, 2, 'Park View', TRUE),
 ('404 Northern Ave, Edmonton, AB', 1203, 330.00, 3, 'River View', FALSE),
-('404 Northern Ave, Edmonton, AB', 1204, 350.00, 4, 'Garden View', TRUE),
+('404 Northern Ave, Edmonton, AB', 1204, 350.00, 5, 'Garden View', TRUE),
 ('404 Northern Ave, Edmonton, AB', 1205, 370.00, 4, 'City View', FALSE),
 ('505 Tundra Trail, Churchill, MB', 1301, 300.00, 1, 'City View', FALSE),
 ('505 Tundra Trail, Churchill, MB', 1302, 320.00, 2, 'Park View', TRUE),
-('505 Tundra Trail, Churchill, MB', 1303, 340.00, 2, 'River View', FALSE),
+('505 Tundra Trail, Churchill, MB', 1303, 340.00, 5, 'River View', FALSE),
 ('505 Tundra Trail, Churchill, MB', 1304, 360.00, 3, 'Garden View', TRUE),
 ('505 Tundra Trail, Churchill, MB', 1305, 380.00, 4, 'City View', FALSE),
 ('606 Arctic View, Fort McMurray, AB', 1401, 310.00, 1, 'City View', FALSE),
 ('606 Arctic View, Fort McMurray, AB', 1402, 330.00, 2, 'Park View', TRUE),
 ('606 Arctic View, Fort McMurray, AB', 1403, 350.00, 3, 'River View', FALSE),
-('606 Arctic View, Fort McMurray, AB', 1404, 370.00, 4, 'Garden View', TRUE),
+('606 Arctic View, Fort McMurray, AB', 1404, 370.00, 5, 'Garden View', TRUE),
 ('606 Arctic View, Fort McMurray, AB', 1405, 390.00, 4, 'City View', FALSE),
 ('707 Polar Express, Labrador City, NL', 1501, 320.00, 1, 'City View', FALSE),
 ('707 Polar Express, Labrador City, NL', 1502, 340.00, 2, 'Park View', TRUE),
 ('707 Polar Express, Labrador City, NL', 1503, 360.00, 3, 'River View', FALSE),
-('707 Polar Express, Labrador City, NL', 1504, 380.00, 4, 'Garden View', TRUE),
+('707 Polar Express, Labrador City, NL', 1504, 380.00, 5, 'Garden View', TRUE),
 ('707 Polar Express, Labrador City, NL', 1505, 400.00, 4, 'City View', FALSE),
 ('808 Northern Edge, Thompson, MB', 1601, 330.00, 1, 'City View', FALSE),
 ('808 Northern Edge, Thompson, MB', 1602, 350.00, 2, 'Park View', TRUE),
-('808 Northern Edge, Thompson, MB', 1603, 370.00, 2, 'River View', FALSE),
+('808 Northern Edge, Thompson, MB', 1603, 370.00, 5, 'River View', FALSE),
 ('808 Northern Edge, Thompson, MB', 1604, 390.00, 3, 'Garden View', TRUE),
 ('808 Northern Edge, Thompson, MB', 1605, 410.00, 4, 'City View', FALSE);
 
--- Maple Leaks Hotels Rooms
+-- Maple Leafs Hotels Rooms
 INSERT INTO Room (hotel_address, room_number, price, capacity, view, extendable) VALUES
 ('1 Maple Lane, Toronto, ON', 1701, 350.00, 1, 'City View', FALSE),
 ('1 Maple Lane, Toronto, ON', 1702, 370.00, 2, 'Park View', TRUE),
 ('1 Maple Lane, Toronto, ON', 1703, 390.00, 3, 'River View', FALSE),
-('1 Maple Lane, Toronto, ON', 1704, 410.00, 4, 'Garden View', TRUE),
+('1 Maple Lane, Toronto, ON', 1704, 410.00, 5, 'Garden View', TRUE),
 ('1 Maple Lane, Toronto, ON', 1705, 430.00, 4, 'City View', FALSE),
 ('200 Mountain View, Calgary, AB', 1801, 340.00, 1, 'City View', FALSE),
 ('200 Mountain View, Calgary, AB', 1802, 360.00, 2, 'Park View', TRUE),
 ('200 Mountain View, Calgary, AB', 1803, 380.00, 3, 'River View', FALSE),
-('200 Mountain View, Calgary, AB', 1804, 400.00, 4, 'Garden View', TRUE),
+('200 Mountain View, Calgary, AB', 1804, 400.00, 5, 'Garden View', TRUE),
 ('200 Mountain View, Calgary, AB', 1805, 420.00, 4, 'City View', FALSE),
 ('555 Seaside Blvd, Vancouver, BC', 1901, 360.00, 1, 'Sea View', FALSE),
 ('555 Seaside Blvd, Vancouver, BC', 1902, 380.00, 2, 'Mountain View', TRUE),
 ('555 Seaside Blvd, Vancouver, BC', 1903, 400.00, 3, 'City View', FALSE),
 ('555 Seaside Blvd, Vancouver, BC', 1904, 420.00, 4, 'Garden View', TRUE),
-('555 Seaside Blvd, Vancouver, BC', 1905, 440.00, 4, 'Sea View', FALSE),
+('555 Seaside Blvd, Vancouver, BC', 1905, 440.00, 5, 'Sea View', FALSE),
 ('1010 Northern Lights Ave, Yellowknife, NT', 2001, 370.00, 1, 'City View', FALSE),
 ('1010 Northern Lights Ave, Yellowknife, NT', 2002, 390.00, 2, 'Park View', TRUE),
 ('1010 Northern Lights Ave, Yellowknife, NT', 2003, 410.00, 3, 'River View', FALSE),
-('1010 Northern Lights Ave, Yellowknife, NT', 2004, 430.00, 4, 'Garden View', TRUE),
+('1010 Northern Lights Ave, Yellowknife, NT', 2004, 430.00, 5, 'Garden View', TRUE),
 ('1010 Northern Lights Ave, Yellowknife, NT', 2005, 450.00, 4, 'City View', FALSE),
 ('768 East Coast Rd, Halifax, NS', 2101, 380.00, 1, 'Sea View', FALSE),
 ('768 East Coast Rd, Halifax, NS', 2102, 400.00, 2, 'City View', TRUE),
 ('768 East Coast Rd, Halifax, NS', 2103, 420.00, 3, 'Park View', FALSE),
 ('768 East Coast Rd, Halifax, NS', 2104, 440.00, 4, 'Garden View', TRUE),
-('768 East Coast Rd, Halifax, NS', 2105, 460.00, 4, 'Sea View', FALSE),
+('768 East Coast Rd, Halifax, NS', 2105, 460.00, 5, 'Sea View', FALSE),
 ('909 Maple Street, Ottawa, ON', 2201, 390.00, 1, 'City View', FALSE),
 ('909 Maple Street, Ottawa, ON', 2202, 410.00, 2, 'Park View', TRUE),
 ('909 Maple Street, Ottawa, ON', 2203, 430.00, 3, 'River View', FALSE),
-('909 Maple Street, Ottawa, ON', 2204, 450.00, 4, 'Garden View', TRUE),
+('909 Maple Street, Ottawa, ON', 2204, 450.00, 5, 'Garden View', TRUE),
 ('909 Maple Street, Ottawa, ON', 2205, 470.00, 4, 'City View', FALSE),
 ('1010 Maple Avenue, Winnipeg, MB', 2301, 400.00, 1, 'City View', FALSE),
 ('1010 Maple Avenue, Winnipeg, MB', 2302, 420.00, 2, 'Park View', TRUE),
 ('1010 Maple Avenue, Winnipeg, MB', 2303, 440.00, 3, 'River View', FALSE),
-('1010 Maple Avenue, Winnipeg, MB', 2304, 460.00, 4, 'Garden View', TRUE),
+('1010 Maple Avenue, Winnipeg, MB', 2304, 460.00, 5, 'Garden View', TRUE),
 ('1010 Maple Avenue, Winnipeg, MB', 2305, 480.00, 4, 'City View', FALSE),
 ('1111 Maple Road, Regina, SK', 2401, 410.00, 1, 'City View', FALSE),
 ('1111 Maple Road, Regina, SK', 2402, 430.00, 2, 'Park View', TRUE),
 ('1111 Maple Road, Regina, SK', 2403, 450.00, 3, 'River View', FALSE),
-('1111 Maple Road, Regina, SK', 2404, 470.00, 4, 'Garden View', TRUE),
+('1111 Maple Road, Regina, SK', 2404, 470.00, 5, 'Garden View', TRUE),
 ('1111 Maple Road, Regina, SK', 2405, 490.00, 4, 'City View', FALSE);
+
+--the four querries with aggregation and nested querries
+
+--1 Aggregation Query - Average Room Price Per Hotel:
+SELECT hotel_address, AVG(price) AS average_price
+FROM Room
+GROUP BY hotel_address;
+
+--2 Nested Query - Hotels with Room Capacity Above a Certain Threshold:
+SELECT hotel_address
+FROM Room
+WHERE capacity > (SELECT MAX(capacity) FROM Room WHERE capacity > 4);
+
+--3 List All Rooms with Extendable Feature in a Specific Hotel:
+SELECT room_number, price, capacity
+FROM Room
+WHERE extendable = TRUE AND hotel_address = '505 Forest Parkway, Whistler, BC';
+
+--4 Total Number of Rooms Across All Hotels:
+SELECT COUNT(*) AS total_rooms
+FROM Room;
+
+--TRIGGERS *****have to change this***
+CREATE TRIGGER after_room_insert
+AFTER INSERT ON Room
+FOR EACH ROW
+BEGIN
+  INSERT INTO RoomLog (operation, room_number, hotel_address, log_date)
+  VALUES ('INSERT', NEW.room_number, NEW.hotel_address, CURRENT_TIMESTAMP);
+END;
+
+CREATE TRIGGER after_room_delete
+AFTER DELETE ON Room
+FOR EACH ROW
+BEGIN
+  INSERT INTO RoomLog (operation, room_number, hotel_address, log_date)
+  VALUES ('DELETE', OLD.room_number, OLD.hotel_address, CURRENT_TIMESTAMP);
+END;
+
+CREATE TRIGGER after_room_update
+AFTER UPDATE ON Room
+FOR EACH ROW
+BEGIN
+  INSERT INTO RoomLog (operation, room_number, hotel_address, log_date)
+  VALUES ('UPDATE', NEW.room_number, NEW.hotel_address, CURRENT_TIMESTAMP);
+END;
+
+CREATE TRIGGER before_hotel_chain_delete
+BEFORE DELETE ON Hotel_Chain
+FOR EACH ROW
+BEGIN
+  IF (SELECT COUNT(*) FROM Hotel WHERE hotel_chain_name = OLD.name) > 0 THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cannot delete hotel chain with existing hotels';
+  END IF;
+END;
+
+
+
+
 
 
 
