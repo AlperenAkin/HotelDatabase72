@@ -282,7 +282,7 @@ INSERT INTO Room (hotel_address, room_number, price, capacity, view, extendable)
 ('1111 Maple Road, Regina, SK', 2404, 470.00, 5, 'Garden View', TRUE),
 ('1111 Maple Road, Regina, SK', 2405, 490.00, 4, 'City View', FALSE);
 
---the four querries with aggregation and nested querries
+--the four aggregation/nested querries
 
 --1 Aggregation Query - Average Room Price Per Hotel:
 SELECT hotel_address, AVG(price) AS average_price
@@ -336,6 +336,26 @@ BEGIN
     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cannot delete hotel chain with existing hotels';
   END IF;
 END;
+
+--INDEXES
+
+--1 This index will accelerate queries that involve searching, joining, or filtering
+--  operations based on the hotel address in the Room table, such as finding all rooms
+--  belonging to a specific hotel.
+
+CREATE INDEX idx_room_hotel_address ON Room(hotel_address);
+
+--2 This index is useful for queries that involve looking up all hotels belonging to a particular chain, enhancing
+--  performance when dealing with aggregations, joins, or searches based on hotel chains.
+
+CREATE INDEX idx_hotel_chain_name ON Hotel(hotel_chain_name);
+
+--3 This index supports efficient execution of queries that filter rooms by price, such as finding rooms within a
+--  specific budget or comparing room prices. It is particularly useful for range queries on room rates.
+
+CREATE INDEX idx_room_price ON Room(price);
+
+
 
 
 
