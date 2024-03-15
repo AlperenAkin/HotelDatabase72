@@ -62,16 +62,16 @@ public class CustomerManager {
 
         // connection object
         ConnectionDB db = new ConnectionDB();
-        System.out.println(customer.getRentingID());
-        System.out.println(renting.getRoomNumber());
-        System.out.println(renting.getHotelAddress());
-        System.out.println(renting.getFromDate());
-        System.out.println(renting.getToDate());
-        System.out.println(renting.getCustomerID());
+        System.out.println(customer.getCustomerId());
+        System.out.println(customer.getFirstName());
+        System.out.println(customer.getLastName());
+        System.out.println(customer.getAddress());
+        System.out.println(customer.getDateRegistered());
+
 
 
         // sql query
-        String insertStudentQuery = "INSERT INTO renting (renting_id, room_number, hotel_address, from_date, to_date, customer_id) VALUES (?, ?, ?, ?, ?, ?);";
+        String insertStudentQuery = "INSERT INTO customer (customer_id, first_name, last_name, address, date_registered) VALUES (?, ?, ?, ?, ?);";
 
         // try connect to database, catch any exceptions
         try {
@@ -81,12 +81,12 @@ public class CustomerManager {
             PreparedStatement stmt = con.prepareStatement(insertStudentQuery);
 
             // set every ? of statement
-            stmt.setInt(1, renting.getRentingID());
-            stmt.setInt(2, renting.getRoomNumber());
-            stmt.setString(3, renting.getHotelAddress());
-            stmt.setString(4, renting.getFromDate());
-            stmt.setString(5, renting.getToDate());
-            stmt.setInt(6, renting.getCustomerID());
+            stmt.setInt(1, customer.getCustomerId());
+            stmt.setString(2, customer.getFirstName());
+            stmt.setString(3, customer.getLastName());
+            stmt.setString(4, customer.getAddress());
+            stmt.setString(5, customer.getDateRegistered());
+
 
             // execute the query
             int output = stmt.executeUpdate();
@@ -97,11 +97,11 @@ public class CustomerManager {
             // close the connection
             db.close();
         } catch (Exception e) {
-            message = "Error while inserting renting: " + e.getMessage();
+            message = "Error while inserting Customer: " + e.getMessage();
         } finally {
             if (con != null) // if connection is still open, then close.
                 con.close();
-            if (message.equals("")) message = "Renitng successfully inserted!";
+            if (message.equals("")) message = "Customer successfully inserted!";
 
         }
 
@@ -110,12 +110,12 @@ public class CustomerManager {
     }
 
 
-    public String updateCustomer(Renting renting) throws Exception {
+    public String updateCustomer(Customer customer) throws Exception {
         Connection con = null;
         String message = "";
 
         // sql query
-        String sql = "UPDATE renting SET room_number=?, hotel_address=?, from_date=?, to_date=?, customer_ID=? WHERE renting_id=?;";
+        String sql = "UPDATE customer SET first_name=?, last_name=?, address=?, date_registered=?;";
 
         // connection object
         ConnectionDB db = new ConnectionDB();
@@ -129,11 +129,10 @@ public class CustomerManager {
             PreparedStatement stmt = con.prepareStatement(sql);
 
             // set every ? of statement
-            stmt.setInt(1, renting.getRoomNumber());
-            stmt.setString(2, renting.getHotelAddress());
-            stmt.setString(3, renting.getFromDate());
-            stmt.setString(4, renting.getToDate());
-            stmt.setInt(5, renting.getCustomerID());
+            stmt.setString(1, customer.getFirstName());
+            stmt.setString(2, customer.getLastName());
+            stmt.setString(3, customer.getAddress());
+            stmt.setString(4, customer.getDateRegistered());
 
             // execute the query
             stmt.executeUpdate();
@@ -142,11 +141,11 @@ public class CustomerManager {
             stmt.close();
 
         } catch (Exception e) {
-            message = "Error while updating renting: " + e.getMessage();
+            message = "Error while updating customer: " + e.getMessage();
 
         } finally {
             if (con != null) con.close();
-            if (message.equals("")) message = "Renting successfully updated!";
+            if (message.equals("")) message = "Customer successfully updated!";
         }
 
         // return respective message
