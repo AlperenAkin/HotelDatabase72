@@ -8,10 +8,10 @@ import java.util.List;
 
 public class RoomManager {
 
-    public List<Room> getRooms(String s) throws Exception {
+    public List<Room> getRooms() throws Exception {
 
         // sql query
-        String sql = "SELECT * FROM room WHERE hotel_address = ?";
+        String sql = "SELECT * FROM room";
         // connection object
         ConnectionDB db = new ConnectionDB();
 
@@ -21,8 +21,8 @@ public class RoomManager {
 
         try (Connection con = db.getConnection()) {
             // prepare statement
+            con.setSchema("eHotelGroup72");
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, s);
 
             // get the results from executing the query
             ResultSet rs = stmt.executeQuery();

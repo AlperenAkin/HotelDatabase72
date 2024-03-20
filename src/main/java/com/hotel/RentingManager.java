@@ -152,4 +152,40 @@ public class RentingManager {
         // return respective message
         return message;
     }
+
+    public String deleteRenting(Integer renting_ID) throws Exception {
+        Connection con = null;
+        String message = "";
+
+        // sql query
+        String sql = "DELETE FROM renting WHERE renting_ID = ?;";
+
+        // database connection object
+        ConnectionDB db = new ConnectionDB();
+
+        // try connect to database, catch any exceptions
+        try {
+            con = db.getConnection();
+
+            // prepare statement
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            // set every ? of statement
+            stmt.setInt(1, renting_ID);
+
+            // execute the query
+            stmt.executeUpdate();
+
+            // close the statement
+            stmt.close();
+
+        } catch (Exception e) {
+            message = "Error while delete renting: " + e.getMessage();
+        } finally {
+            if (con != null) con.close();
+            if (message.equals("")) message = "Renting successfully deleted!";
+        }
+
+        return message;
+    }
 }

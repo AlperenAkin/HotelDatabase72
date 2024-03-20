@@ -60,36 +60,30 @@
     </div>
     <div class="main-content">
         <h2>Manage Bookings and Rentings</h2>
-        <form action="SelectHotelServlet" method="post"> <!-- Update with your selection servlet -->
+        <form action="SelectHotelServlet" method="post"> <!-- Update -->
             <!-- Selection for branch -->
             <select name="branch" required>
                 <option value="">Select Branch</option>
                 <option value="Toronto">Toronto</option>
                 <option value="Vancouver">Vancouver</option>
-                <!-- Add more branches as needed -->
+
             </select>
 
             <!-- Selection for specific hotel -->
             <select name="hotel" required>
                 <option value="">Select Hotel</option>
-                <!-- Options will be populated based on branch selection -->
-                <!-- This will require additional JavaScript or server-side processing -->
+
             </select>
 
             <input type="submit" value="Select Hotel">
         </form>
 
-        <!-- Once a hotel is selected, employees can manage bookings and rentings -->
-        <!-- This section will be shown after a hotel is selected -->
-        <!-- Insert forms and scripts for managing bookings and rentings here -->
+        <!-- >
     </div>
     <div class="footer">
         <p>&copy; 2024 Hotel Management System</p>
     </div>
 
-    <script>
-        // JavaScript for dynamic hotel selection based on branch
-        // This should be implemented to populate the hotel select box based on chosen branch
-    </script>
+
 </body>
 </html>

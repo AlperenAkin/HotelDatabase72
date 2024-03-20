@@ -132,11 +132,12 @@
                 <option value="301-400">$301 - $400</option>
                 <option value="401-500">$401 - $500</option>
             </select>
-            <input type="submit" value="Search Rooms">
+            <input type="submit" value="Search Rooms" href="roomSearchResults.jsp">
+            <a href="roomSearchResults.jsp" class="btn">Search</a>
+
         </form>
 
-        <!-- Additional functionalities for customers -->
-        <!-- Add forms for insert/delete/update customer information -->
+
     </div>
     <div class="footer">
         <p>&copy; 2024 Hotel Management System</p>
