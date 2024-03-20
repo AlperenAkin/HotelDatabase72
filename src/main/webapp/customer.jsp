@@ -1,10 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
+<%@ page import="java.util.List" %>
+<%@ page import="com.hotel.RoomManager" %>
+<%@ page import="com.hotel.Room" %>
+<%@ page import="com.hotel.Message" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
+
+
+<%
+    ArrayList<Message> messages;
+
+    // get any incoming messages from session attribute named messages
+    // if nothing exists then messages is an empty arraylist
+    if ((ArrayList<Message>) session.getAttribute("messages") == null) messages = new ArrayList<>();
+        // else get that value
+    else messages = (ArrayList<Message>) session.getAttribute("messages");
+
+    String msgField = "";
+
+    // create the object in the form of a stringified json
+    for (Message m : messages) {
+        msgField += "{\"type\":\"" + m.type + "\",\"value\":\"" + m.value.replaceAll("['\"]+", "") + "\"},";
+    }
+
+    // empty session messages
+    session.setAttribute("messages", new ArrayList<Message>());
+
+    // get all students from database
+    RoomManager roomManager = new RoomManager();
+    List<Room> rooms = null;
+    if (request.getMethod().equals("POST")) {
+        try {
+            rooms = roomManager.getRooms();
+            System.out.println(rooms.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Customer Portal - Hotel Management System</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
     <style>
+
+        .room-container {
+                    height: 50vh; /* Set the height to 50% of the viewport height */
+                    overflow-y: auto; /* Enable vertical scrolling */
+                    border: 1px solid black; /* Add a border */
+                    width: 50%; /* Set the width to 50% of the viewport width */
+                    margin: auto; /* Center the container */
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #f7f7f7;
@@ -60,9 +111,9 @@
     </div>
     <div class="main-content">
         <h2>Find and Book Your Ideal Room</h2>
-        <form action="SearchServlet" method="get"> <!-- Update with your search servlet -->
+        <form  method="post"> <!-- Update with your search servlet -->
             <!-- Room search criteria -->
-            <input type="text" name="location" placeholder="Enter location">
+            <input type="text" name="location" placeholder="Enter location" >
             <input type="date" name="startDate" placeholder="Check-in Date">
             <input type="date" name="endDate" placeholder="Check-out Date">
 
@@ -137,7 +188,122 @@
 
         </form>
 
+        <% if (rooms != null) { %>
+                <div class="container">
+                    <div class="row" id="row">
+                        <div class="col-md-12">
+                            <div class="card" id="card-container">
+                                <div class="card-body room-container" id="card"> <!-- Add the room-container class here -->
+                                    <% if (rooms.size() == 0) { %>
+                                    <h1 style="margin-top: 5rem;">No Rooms found!</h1>
+                                    <% } else { %>
+                                    <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>Room Number</th>
+                                                    <th>Hotel Address</th>
+                                                    <th>Price</th>
+                                                    <th>Capacity</th>
+                                                    <th>View</th>
+                                                    <th>Extendable</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <%
+                                                for (Room room : rooms) { %>
+                                                <tr>
+                                                    <td><%= room.getRoomNumber() %></td>
+                                                    <td><%= room.getHotelAddress() %></td>
+                                                    <td><%= room.getPrice() %></td>
+                                                    <td><%= room.getCapacity() %>
+                                                    <td><%= room.getView() %></td>
+                                                    <td><%= room.isExtendable() %></td>
+                                                    <td>
+                                                        <form method="post" action="bookRoomServlet"> <!-- Update with your booking servlet -->
+                                                            <input type="hidden" name="roomNumber" value="<%= room.getRoomNumber() %>">
+                                                            <input type="hidden" name="hotelAddress" value="<%= room.getHotelAddress() %>">
+                                                            <input type="submit" value="Book Room">
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                <% } %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                <% } %>
 
+        <%
+            HashMap<String, String> searchCriteria = new HashMap<String, String>();
+
+
+            String location = request.getParameter("location");
+            if (location != null && location.length() > 0) {
+                out.println("<h3>Search Results for " + location + "</h3>");
+                searchCriteria.put("location", location);
+            }
+
+            String startDate = request.getParameter("startDate");
+            if (startDate != null && startDate.length() > 0) {
+                out.println("<h3>Search Results for " + startDate + "</h3>");
+                searchCriteria.put("startDate", startDate);
+            }
+
+            String endDate = request.getParameter("endDate");
+            if (endDate != null && endDate.length() > 0) {
+                out.println("<h3>Search Results for " + endDate + "</h3>");
+                searchCriteria.put("endDate", endDate);
+            }
+
+            String roomCapacity = request.getParameter("roomCapacity");
+            if (roomCapacity != null && roomCapacity.length() > 0) {
+                out.println("<h3>Search Results for " + roomCapacity + "</h3>");
+                searchCriteria.put("roomCapacity", roomCapacity);
+            }
+
+            String hotelChain = request.getParameter("hotelChain");
+            if (hotelChain != null && hotelChain.length() > 0) {
+                out.println("<h3>Search Results for " + hotelChain + "</h3>");
+                searchCriteria.put("hotelChain", hotelChain);
+            }
+
+            String roomView = request.getParameter("roomView");
+            if (roomView != null && roomView.length() > 0) {
+                out.println("<h3>Search Results for " + roomView + "</h3>");
+                searchCriteria.put("roomView", roomView);
+            }
+
+            String bookingStatus = request.getParameter("bookingStatus");
+            if (bookingStatus != null && bookingStatus.length() > 0) {
+                out.println("<h3>Search Results for " + bookingStatus + "</h3>");
+                searchCriteria.put("bookingStatus", bookingStatus);
+            }
+
+            String province = request.getParameter("province");
+            if (province != null && province.length() > 0) {
+                out.println("<h3>Search Results for " + province + "</h3>");
+                searchCriteria.put("province", province);
+            }
+
+            String starRating = request.getParameter("starRating");
+            if (starRating != null && starRating.length() > 0) {
+                out.println("<h3>Search Results for " + starRating + "</h3>");
+                searchCriteria.put("starRating", starRating);
+            }
+
+            String priceRange = request.getParameter("priceRange");
+            if (priceRange != null && priceRange.length() > 0) {
+                out.println("<h3>Search Results for " + priceRange + "</h3>");
+                searchCriteria.put("priceRange", priceRange);
+            }
+
+
+     %>
     </div>
     <div class="footer">
         <p>&copy; 2024 Hotel Management System</p>

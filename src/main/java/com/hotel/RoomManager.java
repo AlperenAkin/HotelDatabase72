@@ -1,5 +1,7 @@
 package com.hotel;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +23,6 @@ public class RoomManager {
 
         try (Connection con = db.getConnection()) {
             // prepare statement
-            con.setSchema("eHotelGroup72");
             PreparedStatement stmt = con.prepareStatement(sql);
 
             // get the results from executing the query
@@ -55,6 +56,70 @@ public class RoomManager {
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
+    }
+
+    public List<Room> searchRooms(HashMap<String, String> searchCriteria) throws Exception {
+        Connection con = null;
+        List<Room> rooms = new ArrayList<>();
+
+        // Build the SQL query dynamically based on the search criteria
+        String sql = "SELECT * FROM room WHERE 1=1";
+        for (Map.Entry<String, String> entry : searchCriteria.entrySet()) {
+            sql += " AND " + entry.getKey() + " = ?";
+        }
+
+        // connection object
+        ConnectionDB db = new ConnectionDB();
+
+        // try connect to database, catch any exceptions
+        try {
+            // get connection
+            con = db.getConnection();
+
+            // prepare the statement
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            // set every ? of statement
+            int i = 1;
+            for (Map.Entry<String, String> entry : searchCriteria.entrySet()) {
+                stmt.setString(i++, entry.getValue());
+            }
+
+            // execute the query
+            ResultSet rs = stmt.executeQuery();
+
+            // while there are results
+            while (rs.next()) {
+                // create a new room object
+                Room room = new Room(
+                        rs.getString("hotel_address"),
+                        rs.getInt("room_number"),
+                        rs.getDouble("price"),
+                        rs.getInt("capacity"),
+                        rs.getString("view"),
+                        rs.getBoolean("extendable")
+                );
+
+                // set all attributes of room
+                // ...
+
+
+                // add room to list
+                rooms.add(room);
+            }
+
+            // close the statement
+            stmt.close();
+
+        } catch (Exception e) {
+            throw new Exception("Error while getting rooms: " + e.getMessage());
+
+        } finally {
+            if (con != null) con.close();
+        }
+
+        // return list of rooms
+        return rooms;
     }
 
     public String createRoom(Room room) throws Exception {

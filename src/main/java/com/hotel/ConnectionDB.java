@@ -29,6 +29,7 @@ public class ConnectionDB {
             Class.forName("org.postgresql.Driver");
             con = DriverManager.getConnection("jdbc:postgresql://"
                     + ipAddress + ":" + dbServerPort + "/" + dbName, dbusername, dbpassword);
+            con.setSchema("eHotelGroup72");
             return con;
         } catch (Exception e) {
 

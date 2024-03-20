@@ -37,16 +37,26 @@
         e.printStackTrace();
     }
 %>
+<style>
+    /* Add this CSS to style the container */
+    .room-container {
+            height: 50vh; /* Set the height to 50% of the viewport height */
+            overflow-y: auto; /* Enable vertical scrolling */
+            border: 1px solid black; /* Add a border */
+            width: 50%; /* Set the width to 50% of the viewport width */
+            margin: auto; /* Center the container */
+     }
+</style>
 
-    <div class="container">
-        <div class="row" id="row">
-            <div class="col-md-12">
-                <div class="card" id="card-container">
-                    <div class="card-body" id="card">
-                        <% if (rooms.size() == 0) { %>
-                        <h1 style="margin-top: 5rem;">No Rooms found!</h1>
-                        <% } else { %>
-                        <div class="table-responsive">
+<div class="container">
+    <div class="row" id="row">
+        <div class="col-md-12">
+            <div class="card" id="card-container">
+                <div class="card-body room-container" id="card"> <!-- Add the room-container class here -->
+                    <% if (rooms.size() == 0) { %>
+                    <h1 style="margin-top: 5rem;">No Rooms found!</h1>
+                    <% } else { %>
+                    <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                 <tr>
