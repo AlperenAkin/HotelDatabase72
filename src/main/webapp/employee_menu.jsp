@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hotel Management System</title>
+    <title>Employee Menu</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
@@ -42,13 +42,15 @@
 </head>
 <body>
     <div class="header">
-        <h1>Hotel Management System 72</h1>
+        <h1>Employee Menu</h1>
     </div>
 
     <div class="main-content">
         <h2>How would you like to proceed?</h2>
-        <a href="room_search.jsp" class="btn">Customer Portal</a>
-        <a href="employee_menu.jsp" class="btn">Employee Portal</a>
+        <a href="hotels.jsp" class="btn">Hotels</a>
+        <a href="rooms.jsp" class="btn">Rooms</a>
+        <a href="employees.jsp" class="btn">Employees</a>
+        <a href="customers.jsp" class="btn">Customers</a>
 
     </div>
 

@@ -61,7 +61,17 @@
 
 <body>
 
-
+    <%
+    String room_number = request.getParameter("roomNumber");
+    System.out.println("room_number: " + room_number);
+    String hotel_address = request.getParameter("hotelAddress");
+    System.out.println("hotel_address: " + hotel_address);
+    String startDate = request.getParameter("startDate");
+    System.out.println("from_date: " + startDate);
+    String endDate = request.getParameter("endDate");
+    System.out.println("to_date: " + endDate);
+    String customer_id = request.getParameter("customerID");
+    %>
 
     <div class="container">
         <div class="row" id="row">
@@ -69,26 +79,31 @@
                 <form class="form-horizontal" name="employee-form" action="booking_create.jsp" method="POST">
                     <div class="form-group col-sm-3 mb-3">
                         <label for="room_number">Room Number</label>
-                        <input type="text" class="form-control" name="room_number" placeholder="room_number">
+                        <input type="text" readonly class="form-control" name="room_number" placeholder="room_number" value="<%=room_number%>">
                     </div>
                     <div class="form-group col-sm-3 mb-3">
                         <label for="hotel_address">Hotel Address</label>
-                        <input type="text" class="form-control" name="hotel_address" placeholder="Enter hotel_address">
+                        <input type="text" readonly class="form-control" name="hotel_address" placeholder="Enter hotel_address"
+                        value="<%=hotel_address%>">
                     </div>
                     <div class="form-group col-sm-3 mb-3">
                         <label for="from_date">from Date</label>
-                        <input type="text" class="form-control" name="from_date" placeholder="Enter from_date">
+                        <input type="text" readonly class="form-control" name="from_date" placeholder="Enter from_date"
+                        value="<%=startDate%>">
                     </div>
                     <div class="form-group col-sm-3 mb-3">
                         <label for="to_date">To Date</label>
-                        <input type="text" class="form-control" name="to_date" placeholder="Enter to_date">
+                        <input type="text"  readonly class="form-control" name="to_date" placeholder="Enter to_date"
+                        value="<%=endDate%>">
+
                     </div>
                     <div class="form-group col-sm-3 mb-3">
                         <label for="customer_id">Customer_id</label>
-                        <input type="text" class="form-control" name="customer_id" placeholder="Enter customer_id">
+                        <input type="text" readonly class="form-control" name="customer_id" placeholder="Enter customer_id"
+                        value="<%=customer_id%>">
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-submit-custom">Submit</button>
+                    <button type="submit" class="btn btn-primary btn-submit-custom">Confirm</button>
                 </form>
             </div>
         </div>

@@ -32,6 +32,70 @@
     RoomManager roomManager = new RoomManager();
     List<Room> rooms = null;
     if (request.getMethod().equals("POST")) {
+
+        HashMap<String, String> searchCriteria = new HashMap<String, String>();
+
+        String location = request.getParameter("location");
+        if (location != null && location.length() > 0) {
+            out.println("<h3>Search Results for " + location + "</h3>");
+            searchCriteria.put("location", location);
+        }
+
+        String startDate = request.getParameter("startDate");
+        if (startDate != null && startDate.length() > 0) {
+            out.println("<h3>Search Results for " + startDate + "</h3>");
+            searchCriteria.put("startDate", startDate);
+        }
+
+        String endDate = request.getParameter("endDate");
+        if (endDate != null && endDate.length() > 0) {
+            out.println("<h3>Search Results for " + endDate + "</h3>");
+            searchCriteria.put("endDate", endDate);
+        }
+
+        String roomCapacity = request.getParameter("roomCapacity");
+        if (roomCapacity != null && roomCapacity.length() > 0) {
+            out.println("<h3>Search Results for " + roomCapacity + "</h3>");
+            searchCriteria.put("roomCapacity", roomCapacity);
+        }
+
+        String hotelChain = request.getParameter("hotelChain");
+        if (hotelChain != null && hotelChain.length() > 0) {
+            out.println("<h3>Search Results for " + hotelChain + "</h3>");
+            searchCriteria.put("hotelChain", hotelChain);
+        }
+
+        String roomView = request.getParameter("roomView");
+        if (roomView != null && roomView.length() > 0) {
+            out.println("<h3>Search Results for " + roomView + "</h3>");
+            searchCriteria.put("roomView", roomView);
+        }
+
+        String bookingStatus = request.getParameter("bookingStatus");
+        if (bookingStatus != null && bookingStatus.length() > 0) {
+            out.println("<h3>Search Results for " + bookingStatus + "</h3>");
+            searchCriteria.put("bookingStatus", bookingStatus);
+        }
+
+        String province = request.getParameter("province");
+        if (province != null && province.length() > 0) {
+            out.println("<h3>Search Results for " + province + "</h3>");
+            searchCriteria.put("province", province);
+        }
+
+        String starRating = request.getParameter("starRating");
+        if (starRating != null && starRating.length() > 0) {
+            out.println("<h3>Search Results for " + starRating + "</h3>");
+            searchCriteria.put("starRating", starRating);
+        }
+
+        String priceRange = request.getParameter("priceRange");
+        if (priceRange != null && priceRange.length() > 0) {
+            out.println("<h3>Search Results for " + priceRange + "</h3>");
+            searchCriteria.put("priceRange", priceRange);
+        }
+
+
         try {
             rooms = roomManager.getRooms();
             System.out.println(rooms.size());
@@ -183,8 +247,8 @@
                 <option value="301-400">$301 - $400</option>
                 <option value="401-500">$401 - $500</option>
             </select>
-            <input type="submit" value="Search Rooms" href="roomSearchResults.jsp">
-            <a href="roomSearchResults.jsp" class="btn">Search</a>
+            <input type="submit" value="Search Rooms" >
+
 
         </form>
 
@@ -220,9 +284,12 @@
                                                     <td><%= room.getView() %></td>
                                                     <td><%= room.isExtendable() %></td>
                                                     <td>
-                                                        <form method="post" action="employee.jsp"> <!-- Update with your booking servlet -->
+                                                        <form method="post" action="booking.jsp"> <!-- Update with your booking servlet -->
                                                             <input type="hidden" name="roomNumber" value="<%= room.getRoomNumber() %>">
                                                             <input type="hidden" name="hotelAddress" value="<%= room.getHotelAddress() %>">
+                                                            <input type="hidden" name="startDate" value="<%= request.getParameter("startDate") %>">
+                                                            <input type="hidden" name="endDate" value="<%= request.getParameter("endDate") %>">
+                                                            <input type="hidden" name="customerID" value="1">
                                                             <input type="submit" value="Book Room" >
 
                                                         </form>
@@ -239,72 +306,7 @@
                         </div>
                 <% } %>
 
-        <%
-            HashMap<String, String> searchCriteria = new HashMap<String, String>();
 
-
-            String location = request.getParameter("location");
-            if (location != null && location.length() > 0) {
-                out.println("<h3>Search Results for " + location + "</h3>");
-                searchCriteria.put("location", location);
-            }
-
-            String startDate = request.getParameter("startDate");
-            if (startDate != null && startDate.length() > 0) {
-                out.println("<h3>Search Results for " + startDate + "</h3>");
-                searchCriteria.put("startDate", startDate);
-            }
-
-            String endDate = request.getParameter("endDate");
-            if (endDate != null && endDate.length() > 0) {
-                out.println("<h3>Search Results for " + endDate + "</h3>");
-                searchCriteria.put("endDate", endDate);
-            }
-
-            String roomCapacity = request.getParameter("roomCapacity");
-            if (roomCapacity != null && roomCapacity.length() > 0) {
-                out.println("<h3>Search Results for " + roomCapacity + "</h3>");
-                searchCriteria.put("roomCapacity", roomCapacity);
-            }
-
-            String hotelChain = request.getParameter("hotelChain");
-            if (hotelChain != null && hotelChain.length() > 0) {
-                out.println("<h3>Search Results for " + hotelChain + "</h3>");
-                searchCriteria.put("hotelChain", hotelChain);
-            }
-
-            String roomView = request.getParameter("roomView");
-            if (roomView != null && roomView.length() > 0) {
-                out.println("<h3>Search Results for " + roomView + "</h3>");
-                searchCriteria.put("roomView", roomView);
-            }
-
-            String bookingStatus = request.getParameter("bookingStatus");
-            if (bookingStatus != null && bookingStatus.length() > 0) {
-                out.println("<h3>Search Results for " + bookingStatus + "</h3>");
-                searchCriteria.put("bookingStatus", bookingStatus);
-            }
-
-            String province = request.getParameter("province");
-            if (province != null && province.length() > 0) {
-                out.println("<h3>Search Results for " + province + "</h3>");
-                searchCriteria.put("province", province);
-            }
-
-            String starRating = request.getParameter("starRating");
-            if (starRating != null && starRating.length() > 0) {
-                out.println("<h3>Search Results for " + starRating + "</h3>");
-                searchCriteria.put("starRating", starRating);
-            }
-
-            String priceRange = request.getParameter("priceRange");
-            if (priceRange != null && priceRange.length() > 0) {
-                out.println("<h3>Search Results for " + priceRange + "</h3>");
-                searchCriteria.put("priceRange", priceRange);
-            }
-
-
-     %>
     </div>
     <div class="footer">
         <p>&copy; 2024 Hotel Management System</p>
