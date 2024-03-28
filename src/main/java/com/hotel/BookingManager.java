@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Date;
 
 public class BookingManager {
 
@@ -62,7 +63,7 @@ public class BookingManager {
 
         // connection object
         ConnectionDB db = new ConnectionDB();
-        System.out.println(booking.getBookingId());
+
         System.out.println(booking.getRoomNumber());
         System.out.println(booking.getHotelAddress());
         System.out.println(booking.getFromDate());
@@ -71,7 +72,7 @@ public class BookingManager {
 
 
         // sql query
-        String insertStudentQuery = "INSERT INTO booking (booking_id, room_number, hotel_address, from_date, to_date, customer_id) VALUES (?, ?, ?, ?, ?, ?);";
+        String insertStudentQuery = "INSERT INTO booking (room_number, hotel_address, from_date, to_date, customer_id) VALUES (?, ?, ?, ?, ?);";
 
         // try connect to database, catch any exceptions
         try {
@@ -81,12 +82,14 @@ public class BookingManager {
             PreparedStatement stmt = con.prepareStatement(insertStudentQuery);
 
             // set every ? of statement
-            stmt.setInt(1, booking.getBookingId());
-            stmt.setInt(2, booking.getRoomNumber());
-            stmt.setString(3, booking.getHotelAddress());
-            stmt.setString(4, booking.getFromDate());
-            stmt.setString(5, booking.getToDate());
-            stmt.setInt(6, booking.getCustomerId());
+            Date fromdate = Date.valueOf(booking.getFromDate());
+            Date todate = Date.valueOf(booking.getToDate());
+
+            stmt.setInt(1, booking.getRoomNumber());
+            stmt.setString(2, booking.getHotelAddress());
+            stmt.setDate(3, fromdate);
+            stmt.setDate(4, todate);
+            stmt.setInt(5, booking.getCustomerId());
 
             // execute the query
             int output = stmt.executeUpdate();

@@ -1,4 +1,5 @@
 package com.hotel;
+import java.sql.Date;
 
 
 public class Booking {
@@ -10,6 +11,13 @@ public class Booking {
     private String to_date;
     private int customer_id;
 
+    public Booking(int room_number, String hotel_address, String from_date, String to_date, int customer_id) {
+        this.room_number = room_number;
+        this.hotel_address = hotel_address;
+        this.from_date = from_date;
+        this.to_date = to_date;
+        this.customer_id = customer_id;
+    }
     public Booking(int booking_id, int room_number, String hotel_address, String from_date, String to_date, int customer_id) {
         this.booking_id = booking_id;
         this.room_number = room_number;

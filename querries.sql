@@ -282,6 +282,15 @@ INSERT INTO Room (hotel_address, room_number, price, capacity, view, extendable)
 ('1111 Maple Road, Regina, SK', 2404, 470.00, 5, 'Garden View', TRUE),
 ('1111 Maple Road, Regina, SK', 2405, 490.00, 4, 'City View', FALSE);
 
+INSERT INTO Customer (customer_id, id, first_name, last_name, address, date_registered) VALUES
+(1, 10, 'John', 'Doe', 'john.doe@email.com', DATE '2021-12-25'),
+(2, 11, 'Jane', 'Smith', 'jane.smith@email.com',DATE '2021-11-25'),
+(3, 12, 'Emily', 'Jones', 'emily.jones@email.com', DATE '2021-10-25'),
+(4, 13, 'Michael', 'Brown', 'michael.brown@email.com', DATE '2021-9-25'),
+(5, 14, 'Sarah', 'Davis', 'sarah.davis@email.com', DATE '2021-8-25');
+
+
+
 --the four aggregation/nested querries
 
 --1 Aggregation Query - Average Room Price Per Hotel:

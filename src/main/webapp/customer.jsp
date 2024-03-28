@@ -220,10 +220,11 @@
                                                     <td><%= room.getView() %></td>
                                                     <td><%= room.isExtendable() %></td>
                                                     <td>
-                                                        <form method="post" action="bookRoomServlet"> <!-- Update with your booking servlet -->
+                                                        <form method="post" action="employee.jsp"> <!-- Update with your booking servlet -->
                                                             <input type="hidden" name="roomNumber" value="<%= room.getRoomNumber() %>">
                                                             <input type="hidden" name="hotelAddress" value="<%= room.getHotelAddress() %>">
-                                                            <input type="submit" value="Book Room">
+                                                            <input type="submit" value="Book Room" >
+
                                                         </form>
                                                     </td>
                                                 </tr>

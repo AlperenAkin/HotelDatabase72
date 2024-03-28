@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
+
 <head>
     <title>Employee Portal - Hotel Management System</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
@@ -54,36 +56,46 @@
             }
         </style>
 </head>
+
+</html>
+
 <body>
-    <div class="header">
-        <h1>Employee Portal</h1>
-    </div>
-    <div class="main-content">
-        <h2>Manage Bookings and Rentings</h2>
-        <form action="SelectHotelServlet" method="post"> <!-- Update -->
-            <!-- Selection for branch -->
-            <select name="branch" required>
-                <option value="">Select Branch</option>
-                <option value="Toronto">Toronto</option>
-                <option value="Vancouver">Vancouver</option>
 
-            </select>
 
-            <!-- Selection for specific hotel -->
-            <select name="hotel" required>
-                <option value="">Select Hotel</option>
 
-            </select>
+    <div class="container">
+        <div class="row" id="row">
+            <div class="col-md-12">
+                <form class="form-horizontal" name="employee-form" action="booking_create.jsp" method="POST">
+                    <div class="form-group col-sm-3 mb-3">
+                        <label for="room_number">Room Number</label>
+                        <input type="text" class="form-control" name="room_number" placeholder="room_number">
+                    </div>
+                    <div class="form-group col-sm-3 mb-3">
+                        <label for="hotel_address">Hotel Address</label>
+                        <input type="text" class="form-control" name="hotel_address" placeholder="Enter hotel_address">
+                    </div>
+                    <div class="form-group col-sm-3 mb-3">
+                        <label for="from_date">from Date</label>
+                        <input type="text" class="form-control" name="from_date" placeholder="Enter from_date">
+                    </div>
+                    <div class="form-group col-sm-3 mb-3">
+                        <label for="to_date">To Date</label>
+                        <input type="text" class="form-control" name="to_date" placeholder="Enter to_date">
+                    </div>
+                    <div class="form-group col-sm-3 mb-3">
+                        <label for="customer_id">Customer_id</label>
+                        <input type="text" class="form-control" name="customer_id" placeholder="Enter customer_id">
+                    </div>
 
-            <input type="submit" value="Select Hotel">
-        </form>
-
-        <!-- >
-    </div>
-    <div class="footer">
-        <p>&copy; 2024 Hotel Management System</p>
-    </div>
+                    <button type="submit" class="btn btn-primary btn-submit-custom">Submit</button>
+                </form>
+            </div>
+        </div>
 
 
 </body>
+
+
+
 </html>
