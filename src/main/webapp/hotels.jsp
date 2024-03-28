@@ -48,6 +48,7 @@
 <html>
 <head>
     <title>HOTELS</title>
+
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
     <style>
 
@@ -106,6 +107,14 @@
         input[type="submit"]:hover {
             background-color: #00796b;
         }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header form {
+            margin: 0;
+        }
     </style>
 
 
@@ -113,6 +122,11 @@
 <body>
     <div class="header">
         <h1>Manage Hotels</h1>
+        <form method="post" action="hotel_create.jsp"> <!-- Update with your booking servlet -->
+
+            <input type="submit" value="Create Hotel" >
+
+        </form>
     </div>
     <div class="main-content">
         <h2>Hotels</h2>

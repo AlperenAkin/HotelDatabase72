@@ -51,6 +51,7 @@
         <a href="rooms.jsp" class="btn">Rooms</a>
         <a href="employees.jsp" class="btn">Employees</a>
         <a href="customers.jsp" class="btn">Customers</a>
+        <a href="bookings.jsp" class="btn">Convert Booking to Renting</a>
 
     </div>
 

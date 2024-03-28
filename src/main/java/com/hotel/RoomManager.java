@@ -181,7 +181,7 @@ public class RoomManager {
         String message = "";
 
         // sql query
-        String sql = "UPDATE room SET price=?, capacity=?, view=?, extendable=? WHERE renting_id=? AND hotel_address=?;";
+        String sql = "UPDATE room SET price=?, capacity=?, view=?, extendable=? WHERE room_number=? AND hotel_address=?;";
 
         // connection object
         ConnectionDB db = new ConnectionDB();
@@ -199,6 +199,8 @@ public class RoomManager {
             stmt.setInt(2, room.getCapacity());
             stmt.setString(3, room.getView());
             stmt.setBoolean(4, room.isExtendable());
+            stmt.setInt(5, room.getRoomNumber());
+            stmt.setString(6, room.getHotelAddress());
 
 
             // execute the query
@@ -208,7 +210,7 @@ public class RoomManager {
             stmt.close();
 
         } catch (Exception e) {
-            message = "Error while updating renting: " + e.getMessage();
+            message = "Error while updating room: " + e.getMessage();
 
         } finally {
             if (con != null) con.close();
@@ -218,5 +220,44 @@ public class RoomManager {
         // return respective message
         return message;
     }
+
+    public String deleteRoom(String hotel_address, Integer room_number) throws Exception {
+        Connection con = null;
+        String message = "";
+
+        // sql query
+        String sql = "DELETE FROM room WHERE hotel_address = ? AND room_number = ?;";
+
+        // database connection object
+        ConnectionDB db = new ConnectionDB();
+
+        // try connect to database, catch any exceptions
+        try {
+            con = db.getConnection();
+
+            // prepare statement
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            // set every ? of statement
+            stmt.setString(1, hotel_address);
+            stmt.setInt(2, room_number);
+
+            // execute the query
+            stmt.executeUpdate();
+
+            // close the statement
+            stmt.close();
+
+        } catch (Exception e) {
+            message = "Error while delete hotel: " + e.getMessage();
+        } finally {
+            if (con != null) con.close();
+            if (message.equals("")) message = "hotel successfully deleted!";
+        }
+
+        return message;
+    }
+
+
 }
 

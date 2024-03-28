@@ -71,7 +71,7 @@ public class CustomerManager {
 
 
         // sql query
-        String insertStudentQuery = "INSERT INTO customer (customer_id, first_name, last_name, address, date_registered) VALUES (?, ?, ?, ?, ?);";
+        String insertStudentQuery = "INSERT INTO customer (first_name, last_name, address, date_registered) VALUES (?, ?, ?, ?);";
 
         // try connect to database, catch any exceptions
         try {
@@ -81,11 +81,11 @@ public class CustomerManager {
             PreparedStatement stmt = con.prepareStatement(insertStudentQuery);
 
             // set every ? of statement
-            stmt.setInt(1, customer.getCustomerId());
-            stmt.setString(2, customer.getFirstName());
-            stmt.setString(3, customer.getLastName());
-            stmt.setString(4, customer.getAddress());
-            stmt.setString(5, customer.getDateRegistered());
+
+            stmt.setString(1, customer.getFirstName());
+            stmt.setString(2, customer.getLastName());
+            stmt.setString(3, customer.getAddress());
+            stmt.setString(4, customer.getDateRegistered());
 
 
             // execute the query
@@ -115,7 +115,7 @@ public class CustomerManager {
         String message = "";
 
         // sql query
-        String sql = "UPDATE customer SET first_name=?, last_name=?, address=?, date_registered=?;";
+        String sql = "UPDATE customer SET first_name=?, last_name=?, address=?, date_registered=? WHERE customer_id=?;";
 
         // connection object
         ConnectionDB db = new ConnectionDB();
@@ -133,6 +133,7 @@ public class CustomerManager {
             stmt.setString(2, customer.getLastName());
             stmt.setString(3, customer.getAddress());
             stmt.setString(4, customer.getDateRegistered());
+            stmt.setInt(5, customer.getCustomerId());
 
             // execute the query
             stmt.executeUpdate();
@@ -149,6 +150,42 @@ public class CustomerManager {
         }
 
         // return respective message
+        return message;
+    }
+
+    public String deleteCustomer(Integer customer_id) throws Exception {
+        Connection con = null;
+        String message = "";
+
+        // sql query
+        String sql = "DELETE FROM customer WHERE customer_id = ?;";
+
+        // database connection object
+        ConnectionDB db = new ConnectionDB();
+
+        // try connect to database, catch any exceptions
+        try {
+            con = db.getConnection();
+
+            // prepare statement
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            // set every ? of statement
+            stmt.setInt(1, customer_id);
+
+            // execute the query
+            stmt.executeUpdate();
+
+            // close the statement
+            stmt.close();
+
+        } catch (Exception e) {
+            message = "Error while delete hotel: " + e.getMessage();
+        } finally {
+            if (con != null) con.close();
+            if (message.equals("")) message = "hotel successfully deleted!";
+        }
+
         return message;
     }
 }

@@ -1,25 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<%@ page import="com.hotel.HotelManager" %>
-<%@ page import="com.hotel.Hotel" %>
+<%@ page import="com.hotel.RoomManager" %>
+<%@ page import="com.hotel.Room" %>
 <%@ page import="com.hotel.Message" %>
 <%@ page import="java.util.ArrayList" %>
 
 <%
-    String address = request.getParameter("hotel_address");
-    Integer stars = Integer.valueOf(request.getParameter("Stars"));
-    String contact_email = request.getParameter("contact_email");
-    Integer num_rooms = Integer.valueOf(request.getParameter("num_rooms"));
-    String hotel_chain_name = request.getParameter("hotelChain");
+    String address = request.getParameter("address");
+    Integer roomNumber = Integer.valueOf(request.getParameter("roomNumber"));
+    Double price = Double.valueOf(request.getParameter("price"));
+    Integer capacity = Integer.valueOf(request.getParameter("capacity"));
+    String view = request.getParameter("view");
+    Boolean extendable = Boolean.valueOf(request.getParameter("extendable"));
 
-    HotelManager hotelManager = new HotelManager();
+    RoomManager roomManager = new RoomManager();
 
-    Hotel hotel = new Hotel(address, stars, contact_email, num_rooms, hotel_chain_name);
+    Room room = new Room(address, roomNumber, price, capacity, view, extendable);
 
     Message msg;
 
     try {
-        String value = hotelManager.createHotel(hotel);
+        String value = roomManager.createRoom(room);
         // if the value contains error/Error then this is an error message
         if (value.contains("Error") || value.contains("error")) msg = new Message("error", value);
 
@@ -36,5 +37,5 @@
     // set session attribute named messages to messages value
     session.setAttribute("messages", messages);
     // redirect to students page
-    response.sendRedirect("hotels.jsp");
+    response.sendRedirect("rooms.jsp");
 %>
