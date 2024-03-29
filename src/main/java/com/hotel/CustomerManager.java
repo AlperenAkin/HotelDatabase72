@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Date;
 
 public class CustomerManager {
 
@@ -81,11 +82,12 @@ public class CustomerManager {
             PreparedStatement stmt = con.prepareStatement(insertStudentQuery);
 
             // set every ? of statement
+            Date date = Date.valueOf(customer.getDateRegistered());
 
             stmt.setString(1, customer.getFirstName());
             stmt.setString(2, customer.getLastName());
             stmt.setString(3, customer.getAddress());
-            stmt.setString(4, customer.getDateRegistered());
+            stmt.setDate(4, date);
 
 
             // execute the query

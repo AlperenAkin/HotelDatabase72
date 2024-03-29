@@ -15,6 +15,13 @@ public class Employee {
         this.address = address;
     }
 
+    public Employee(String first_name, String last_name, String address) {
+
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.address = address;
+    }
+
     // Getters
     public int getEmployeeId() {
         return employee_id;

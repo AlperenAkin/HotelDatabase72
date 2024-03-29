@@ -166,7 +166,7 @@
                                                             <input type="hidden" name="employee_id" value="<%= employee.getEmployeeId()  %>">
                                                             <input type="hidden" name="first_name" value="<%= employee.getFirstName() %>">
                                                             <input type="hidden" name="last_name" value="<%= employee.getLastName() %>">
-                                                            <input type="hidden" name="address" value="<%= employee.getAddress() %>">
+                                                            <input type="hidden" name="email" value="<%= employee.getAddress() %>">
                                                             <input type="submit" value="Update" >
 
 

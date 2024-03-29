@@ -1,6 +1,7 @@
 package com.hotel;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -77,6 +78,7 @@ public class EmployeeManager {
             PreparedStatement stmt = con.prepareStatement(insertStudentQuery);
 
             // set every ? of statement
+
 
             stmt.setString(1, employee.getFirstName());
             stmt.setString(2, employee.getLastName());

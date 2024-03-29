@@ -17,6 +17,14 @@ public class Customer {
         this.date_registered = date_registered;
     }
 
+    public Customer(String first_name, String last_name, String address, String date_registered) {
+
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.address = address;
+        this.date_registered = date_registered;
+    }
+
     // Getters and Setters
     public int getCustomerId() {
         return customer_id;
