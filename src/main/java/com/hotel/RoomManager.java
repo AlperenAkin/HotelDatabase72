@@ -58,15 +58,9 @@ public class RoomManager {
         }
     }
 
-    public List<Room> searchRooms(HashMap<String, String> searchCriteria) throws Exception {
+    public List<Room> queryRooms(String query) throws Exception {
         Connection con = null;
         List<Room> rooms = new ArrayList<>();
-
-        // Build the SQL query dynamically based on the search criteria
-        String sql = "SELECT * FROM room WHERE 1=1";
-        for (Map.Entry<String, String> entry : searchCriteria.entrySet()) {
-            sql += " AND " + entry.getKey() + " = ?";
-        }
 
         // connection object
         ConnectionDB db = new ConnectionDB();
@@ -77,13 +71,9 @@ public class RoomManager {
             con = db.getConnection();
 
             // prepare the statement
-            PreparedStatement stmt = con.prepareStatement(sql);
+            PreparedStatement stmt = con.prepareStatement(query);
 
-            // set every ? of statement
-            int i = 1;
-            for (Map.Entry<String, String> entry : searchCriteria.entrySet()) {
-                stmt.setString(i++, entry.getValue());
-            }
+
 
             // execute the query
             ResultSet rs = stmt.executeQuery();
@@ -98,28 +88,26 @@ public class RoomManager {
                         rs.getInt("capacity"),
                         rs.getString("view"),
                         rs.getBoolean("extendable")
+
+
                 );
-
-                // set all attributes of room
-                // ...
-
 
                 // add room to list
                 rooms.add(room);
             }
 
-            // close the statement
+            // close result set
+            rs.close();
+            // close statement
             stmt.close();
+            con.close();
+            db.close();
 
+            // return result
+            return rooms;
         } catch (Exception e) {
-            throw new Exception("Error while getting rooms: " + e.getMessage());
-
-        } finally {
-            if (con != null) con.close();
+            throw new Exception(e.getMessage());
         }
-
-        // return list of rooms
-        return rooms;
     }
 
     public String createRoom(Room room) throws Exception {

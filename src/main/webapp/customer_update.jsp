@@ -82,7 +82,7 @@
                         <label for="customer_id">CustomerID</label>
                         <input type="text" readonly class="form-control" name="customer_id" placeholder="customerid" value="<%=customer_id%>">
                     </div>
-                    
+
                     <div class="form-group col-sm-3 mb-3">
                         <label for="first_name">First Name</label>
                         <input type="text" class="form-control" name="first_name" placeholder="Enter first_name"

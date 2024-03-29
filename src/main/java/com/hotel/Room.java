@@ -7,6 +7,25 @@ public class Room {
     private String view;
     private boolean extendable;
 
+    private String hotel_chain_name;
+
+    private int stars;
+
+    public Room(String hotel_address, int room_number, double price, int capacity, String view, boolean extendable, String hotel_chain_name, int stars) {
+        this.hotel_address = hotel_address;
+        this.room_number = room_number;
+        this.price = price;
+        this.capacity = capacity;
+        this.view = view;
+        this.extendable = extendable;
+        this.hotel_chain_name = hotel_chain_name;
+        this.stars = stars;
+    }
+
+
+
+
+
     // Constructor
     public Room(String hotel_address, int room_number, double price, int capacity, String view, boolean extendable) {
         this.hotel_address = hotel_address;
@@ -65,6 +84,22 @@ public class Room {
 
     public void setExtendable(boolean extendable) {
         this.extendable = extendable;
+    }
+
+    public String getHotelChainName() {
+        return hotel_chain_name;
+    }
+
+    public int getStars() {
+        return stars;
+    }
+
+    public void setHotelChainName(String hotel_chain_name) {
+        this.hotel_chain_name = hotel_chain_name;
+    }
+
+    public void setStars(int stars) {
+        this.stars = stars;
     }
 
     // Add toString() method if needed for debugging

@@ -35,11 +35,7 @@
 
         HashMap<String, String> searchCriteria = new HashMap<String, String>();
 
-        String location = request.getParameter("location");
-        if (location != null && location.length() > 0) {
-            out.println("<h3>Search Results for " + location + "</h3>");
-            searchCriteria.put("location", location);
-        }
+
 
         String startDate = request.getParameter("startDate");
         if (startDate != null && startDate.length() > 0) {
@@ -71,11 +67,7 @@
             searchCriteria.put("roomView", roomView);
         }
 
-        String bookingStatus = request.getParameter("bookingStatus");
-        if (bookingStatus != null && bookingStatus.length() > 0) {
-            out.println("<h3>Search Results for " + bookingStatus + "</h3>");
-            searchCriteria.put("bookingStatus", bookingStatus);
-        }
+
 
         String province = request.getParameter("province");
         if (province != null && province.length() > 0) {
@@ -96,8 +88,51 @@
         }
 
 
+        List<String> where = new ArrayList<String>();
+        for (String searchKey : searchCriteria.keySet()) {
+            String searchValue = searchCriteria.get(searchKey);
+
+            String searchToken;
+            if (searchKey.equals("startDate")) {
+                //rooms = roomManager.getRoomsByStartDate(searchValue);
+            } else if (searchKey.equals("endDate")) {
+                //rooms = roomManager.getRoomsByEndDate(searchValue);
+            } else if (searchKey.equals("roomCapacity")) {
+                searchToken = "capacity = " + searchValue;
+                where.add(searchToken);
+            } else if (searchKey.equals("hotelChain")) {
+                searchToken = "exists( " +
+                        "select address from hotel h where h.address = room.hotel_address " +
+                        "and h.hotel_chain_name = '" + searchValue + "')";
+                where.add(searchToken);
+            } else if (searchKey.equals("roomView")) {
+                searchToken = "view = '" + searchValue + "'";
+                where.add(searchToken);
+            } else if (searchKey.equals("province")) {
+                searchToken = "hotel_address like '%" + searchValue + "%'";
+                where.add(searchToken);
+            } else if (searchKey.equals("starRating")) {
+                searchToken = "exists( " +
+                    "select stars from hotel h where h.address = room.hotel_address " +
+                    "and h.stars = " + searchValue + ")";
+                where.add(searchToken);
+            } else if (searchKey.equals("priceRange")) {
+                String[] parts = searchValue.split("-");
+                String minPrice = parts[0];
+                String maxPrice = parts[1];
+                searchToken = "price >= " + minPrice + " AND price <= " + maxPrice;
+                where.add(searchToken);
+            }
+        }
+        String[] whereArray = new String[where.size()];
+        whereArray = where.toArray(whereArray);
+        String whereClause = String.join(" AND ", whereArray);
+        System.out.println(whereClause);
+        String query = "SELECT * FROM room WHERE " + whereClause;
+        System.out.println(query);
+
         try {
-            rooms = roomManager.getRooms();
+            rooms = roomManager.queryRooms(query);
             System.out.println(rooms.size());
         } catch (Exception e) {
             e.printStackTrace();
@@ -116,7 +151,7 @@
                     height: 50vh; /* Set the height to 50% of the viewport height */
                     overflow-y: auto; /* Enable vertical scrolling */
                     border: 1px solid black; /* Add a border */
-                    width: 50%; /* Set the width to 50% of the viewport width */
+                    width: 70%; /* Set the width to 50% of the viewport width */
                     margin: auto; /* Center the container */
         }
 
@@ -177,7 +212,7 @@
         <h2>Find and Book Your Ideal Room</h2>
         <form  method="post"> <!-- Update with your search servlet -->
             <!-- Room search criteria -->
-            <input type="text" name="location" placeholder="Enter location" >
+
             <input type="date" name="startDate" placeholder="Check-in Date">
             <input type="date" name="endDate" placeholder="Check-out Date">
 
@@ -201,19 +236,15 @@
 
             <select name="roomView">
                 <option value="">Select Room View</option>
-                <option value="city">City</option>
-                <option value="mountain">Mountain</option>
-                <option value="ocean">Ocean</option>
-                <option value="garden">Garden</option>
-                <option value="pool">Pool</option>
-                <option value="forest">Pool</option>
+                <option value="City View">City View</option>
+                <option value="Mountain View">Mountain View</option>
+                <option value="Ocean View">Ocean View</option>
+                <option value="Garden View">Garden View</option>
+                <option value="Pool View">Pool View</option>
+                <option value="Forest View">Forest View</option>
             </select>
 
-            <select name="bookingStatus">
-                <option value="">Select Booking Status</option>
-                <option value="booking">Booking</option>
-                <option value="renting">Renting</option>
-            </select>
+
 
             <select name="province">
                 <option value="">Select Province</option>
