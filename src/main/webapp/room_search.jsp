@@ -93,6 +93,7 @@
             String searchValue = searchCriteria.get(searchKey);
 
             String searchToken;
+
             if (searchKey.equals("startDate")) {
                 //rooms = roomManager.getRoomsByStartDate(searchValue);
             } else if (searchKey.equals("endDate")) {
@@ -124,11 +125,18 @@
                 where.add(searchToken);
             }
         }
+
+        String searchTokenDate = "not exists( " +
+                        "select booking_id from booking where room_number = room.room_number and hotel_address = room.hotel_address" +
+                            " and from_date <= '" + endDate + "'" +
+                            " and to_date >= '" + startDate + "')";
+        where.add(searchTokenDate);
+
         String[] whereArray = new String[where.size()];
         whereArray = where.toArray(whereArray);
         String whereClause = String.join(" AND ", whereArray);
         System.out.println(whereClause);
-        String query = "SELECT * FROM room WHERE " + whereClause;
+        String query = "SELECT * FROM room LEFT OUTER JOIN hotel ON room.hotel_address = hotel.address WHERE " + whereClause;
         System.out.println(query);
 
         try {
@@ -296,6 +304,8 @@
                                             <table class="table">
                                                 <thead>
                                                 <tr>
+                                                    <th>Hotel Chain Name</th>
+                                                    <th>Star Rating</th>
                                                     <th>Room Number</th>
                                                     <th>Hotel Address</th>
                                                     <th>Price</th>
@@ -308,6 +318,9 @@
                                                 <%
                                                 for (Room room : rooms) { %>
                                                 <tr>
+
+                                                    <td><%= room.getHotelChainName() %></td>
+                                                    <td><%= room.getStars() %></td>
                                                     <td><%= room.getRoomNumber() %></td>
                                                     <td><%= room.getHotelAddress() %></td>
                                                     <td><%= room.getPrice() %></td>

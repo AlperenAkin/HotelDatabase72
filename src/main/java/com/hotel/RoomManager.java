@@ -87,7 +87,9 @@ public class RoomManager {
                         rs.getDouble("price"),
                         rs.getInt("capacity"),
                         rs.getString("view"),
-                        rs.getBoolean("extendable")
+                        rs.getBoolean("extendable"),
+                        rs.getString("hotel_chain_name"),
+                        rs.getInt("stars")
 
 
                 );

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Date;
 
 public class RentingManager {
 
@@ -22,6 +23,7 @@ public class RentingManager {
         try (Connection con = db.getConnection()) {
             // prepare statement
             PreparedStatement stmt = con.prepareStatement(sql);
+
 
             // get the results from executing the query
             ResultSet rs = stmt.executeQuery();
@@ -56,13 +58,15 @@ public class RentingManager {
         }
     }
 
+
+
     public String createRenting(Renting renting) throws Exception {
         String message = "";
         Connection con = null;
 
         // connection object
         ConnectionDB db = new ConnectionDB();
-        System.out.println(renting.getRentingID());
+
         System.out.println(renting.getRoomNumber());
         System.out.println(renting.getHotelAddress());
         System.out.println(renting.getFromDate());
@@ -71,7 +75,7 @@ public class RentingManager {
 
 
         // sql query
-        String insertStudentQuery = "INSERT INTO renting (renting_id, room_number, hotel_address, from_date, to_date, customer_id) VALUES (?, ?, ?, ?, ?, ?);";
+        String insertStudentQuery = "INSERT INTO renting (room_number, hotel_address, from_date, to_date, customer_id) VALUES (?, ?, ?, ?, ?);";
 
         // try connect to database, catch any exceptions
         try {
@@ -80,13 +84,16 @@ public class RentingManager {
             // prepare the statement
             PreparedStatement stmt = con.prepareStatement(insertStudentQuery);
 
+            Date fromdate = Date.valueOf(renting.getFromDate());
+            Date todate = Date.valueOf(renting.getToDate());
+
             // set every ? of statement
-            stmt.setInt(1, renting.getRentingID());
-            stmt.setInt(2, renting.getRoomNumber());
-            stmt.setString(3, renting.getHotelAddress());
-            stmt.setString(4, renting.getFromDate());
-            stmt.setString(5, renting.getToDate());
-            stmt.setInt(6, renting.getCustomerID());
+
+            stmt.setInt(1, renting.getRoomNumber());
+            stmt.setString(2, renting.getHotelAddress());
+            stmt.setDate(3, fromdate);
+            stmt.setDate(4, todate);
+            stmt.setInt(5, renting.getCustomerID());
 
             // execute the query
             int output = stmt.executeUpdate();

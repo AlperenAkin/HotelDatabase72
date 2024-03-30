@@ -2,8 +2,8 @@
 
 
 <%@ page import="java.util.List" %>
-<%@ page import="com.hotel.BookingManager" %>
-<%@ page import="com.hotel.Booking" %>
+<%@ page import="com.hotel.RentingManager" %>
+<%@ page import="com.hotel.Renting" %>
 <%@ page import="com.hotel.Message" %>
 <%@ page import="java.util.ArrayList" %>
 
@@ -29,13 +29,13 @@
     session.setAttribute("messages", new ArrayList<Message>());
 
     // get all students from database
-    BookingManager bookingManager = new BookingManager();
-    List<Booking> bookings = null;
+    RentingManager rentingManager = new RentingManager();
+    List<Renting> rentings = null;
 
 
      try {
-        bookings = bookingManager.getBookings();
-        System.out.println(bookings.size());
+        rentings = rentingManager.getRentings();
+        System.out.println(rentings.size());
 
      } catch (Exception e) {
         e.printStackTrace();
@@ -47,7 +47,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>BOOKINGS</title>
+    <title>RENTINGS</title>
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
     <style>
@@ -121,30 +121,30 @@
 </head>
 <body>
     <div class="header">
-        <h1>Convert Bookings</h1>
-        <form method="post" action="rentings.jsp"> <!-- Update with your booking servlet -->
+        <h1>View Rentings</h1>
+        <form method="post" action="bookings.jsp"> <!-- Update with your booking servlet -->
 
-            <input type="submit" value="View Rentings" >
+            <input type="submit" value="Back to Bookings" >
 
         </form>
     </div>
     <div class="main-content">
-        <h2>Bookings</h2>
+        <h2>Rentings</h2>
 
-        <% if (bookings != null) { %>
+        <% if (rentings != null) { %>
                 <div class="container">
                     <div class="row" id="row">
                         <div class="col-md-12">
                             <div class="card" id="card-container">
                                 <div class="card-body room-container" id="card"> <!-- Add the room-container class here -->
-                                    <% if (bookings.size() == 0) { %>
+                                    <% if (rentings.size() == 0) { %>
                                     <h1 style="margin-top: 5rem;">No Bookings found!</h1>
                                     <% } else { %>
                                     <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
                                                 <tr>
-                                                    <th>booking_id</th>
+                                                    <th>renting_id</th>
                                                     <th>Room Number</th>
                                                     <th>Hotel Address</th>
                                                     <th>From Date</th>
@@ -156,31 +156,16 @@
                                                 </thead>
                                                 <tbody>
                                                 <%
-                                                for (Booking booking : bookings) { %>
+                                                for (Renting renting : rentings) { %>
                                                 <tr>
-                                                    <td><%= booking.getBookingId() %></td>
-                                                    <td><%= booking.getRoomNumber() %></td>
-                                                    <td><%= booking.getHotelAddress() %></td>
-                                                    <td><%= booking.getFromDate() %></td>
-                                                    <td><%= booking.getToDate() %></td>
-                                                    <td><%= booking.getCustomerId() %></td>
-
-                                                    <td>
-                                                        <form method="post" action="convert_booking.jsp"> <!-- Update with your booking servlet -->
-                                                            <input type="hidden" name="booking_id" value="<%= booking.getBookingId()  %>">
-                                                            <input type="hidden" name="room_number" value="<%= booking.getRoomNumber() %>">
-                                                            <input type="hidden" name="hotel_address" value="<%= booking.getHotelAddress() %>">
-                                                            <input type="hidden" name="from_date" value="<%= booking.getFromDate() %>">
-                                                            <input type="hidden" name="to_date" value="<%= booking.getToDate() %>">
-                                                            <input type="hidden" name="customer_id" value="<%= booking.getCustomerId() %>">
-
-                                                            <input type="submit" value="Convert Booking" >
+                                                    <td><%= renting.getRentingID() %></td>
+                                                    <td><%= renting.getRoomNumber() %></td>
+                                                    <td><%= renting.getHotelAddress() %></td>
+                                                    <td><%= renting.getFromDate() %></td>
+                                                    <td><%= renting.getToDate() %></td>
+                                                    <td><%= renting.getCustomerID() %></td>
 
 
-                                                        </form>
-
-
-                                                    </td>
 
 
 

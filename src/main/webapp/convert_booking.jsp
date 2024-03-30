@@ -62,21 +62,24 @@
 <body>
 
     <%
-    String room_number = request.getParameter("roomNumber");
+    String booking_id = request.getParameter("booking_id");
+    System.out.println("booking_id: " + booking_id);
+    String room_number = request.getParameter("room_number");
     System.out.println("room_number: " + room_number);
-    String hotel_address = request.getParameter("hotelAddress");
+    String hotel_address = request.getParameter("hotel_address");
     System.out.println("hotel_address: " + hotel_address);
-    String startDate = request.getParameter("startDate");
-    System.out.println("from_date: " + startDate);
-    String endDate = request.getParameter("endDate");
-    System.out.println("to_date: " + endDate);
-    String customer_id = request.getParameter("customerID");
+    String from_date = request.getParameter("from_date");
+    System.out.println("from_date: " + from_date);
+    String to_date = request.getParameter("to_date");
+    System.out.println("to_date: " + to_date);
+    String customer_id = request.getParameter("customer_id");
     %>
 
     <div class="container">
         <div class="row" id="row">
             <div class="col-md-12">
-                <form class="form-horizontal" name="employee-form" action="booking_create.jsp" method="POST">
+                <form class="form-horizontal" name="convert-form" action="convert_booking_controller.jsp" method="POST">
+                    <input type="hidden" name="booking_id" value="<%=booking_id%>">
                     <div class="form-group col-sm-3 mb-3">
                         <label for="room_number">Room Number</label>
                         <input type="text" readonly class="form-control" name="room_number" placeholder="room_number" value="<%=room_number%>">
@@ -89,12 +92,12 @@
                     <div class="form-group col-sm-3 mb-3">
                         <label for="from_date">from Date</label>
                         <input type="text" class="form-control" name="from_date" placeholder="Enter from_date"
-                        value="<%=startDate%>">
+                        value="<%=from_date%>">
                     </div>
                     <div class="form-group col-sm-3 mb-3">
                         <label for="to_date">To Date</label>
                         <input type="text" class="form-control" name="to_date" placeholder="Enter to_date"
-                        value="<%=endDate%>">
+                        value="<%=to_date%>">
 
                     </div>
                     <div class="form-group col-sm-3 mb-3">

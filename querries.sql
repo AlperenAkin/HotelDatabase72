@@ -298,10 +298,13 @@ SELECT hotel_address, AVG(price) AS average_price
 FROM Room
 GROUP BY hotel_address;
 
---2 Nested Query - Hotels with Room Capacity Above a Certain Threshold:
-SELECT hotel_address
-FROM Room
-WHERE capacity > (SELECT MAX(capacity) FROM Room WHERE capacity > 4);
+--2 Nested Query -
+select * from room
+where exists ( select booking_id from booking
+			  where room_number = room.room_number
+			    and hotel_address = room.hotel_address
+			    and from_date <= '2020-06-20'
+			    and to_date >= '2020-06-07')
 
 --3 List All Rooms with Extendable Feature in a Specific Hotel:
 SELECT room_number, price, capacity

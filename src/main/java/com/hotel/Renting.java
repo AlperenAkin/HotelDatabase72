@@ -19,6 +19,15 @@ public class Renting {
         this.customer_id = customer_id;
     }
 
+    public Renting(int room_number, String hotel_address, String from_date, String to_date, int customer_id) {
+
+        this.room_number = room_number;
+        this.hotel_address = hotel_address;
+        this.from_date = from_date;
+        this.to_date = to_date;
+        this.customer_id = customer_id;
+    }
+
     // Getters
     public int getRentingID() {
         return renting_ID;
