@@ -165,6 +165,10 @@
                                                     <td>
                                                         <form method="post" action="customer_update.jsp"> <!-- Update with your booking servlet -->
                                                             <input type="hidden" name="customer_id" value="<%= customer.getCustomerId() %>">
+                                                            <input type="hidden" name="first_name" value="<%= customer.getFirstName() %>">
+                                                            <input type="hidden" name="last_name" value="<%= customer.getLastName() %>">
+                                                            <input type="hidden" name="address" value="<%= customer.getAddress() %>">
+                                                            <input type="hidden" name="date_registered" value="<%= customer.getDateRegistered() %>">
 
                                                             <input type="submit" value="Update" >
 

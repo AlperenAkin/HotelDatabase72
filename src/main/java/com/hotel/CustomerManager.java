@@ -130,11 +130,13 @@ public class CustomerManager {
             // prepare the statement
             PreparedStatement stmt = con.prepareStatement(sql);
 
+            Date date = Date.valueOf(customer.getDateRegistered());
+
             // set every ? of statement
             stmt.setString(1, customer.getFirstName());
             stmt.setString(2, customer.getLastName());
             stmt.setString(3, customer.getAddress());
-            stmt.setString(4, customer.getDateRegistered());
+            stmt.setDate(4, date);;
             stmt.setInt(5, customer.getCustomerId());
 
             // execute the query

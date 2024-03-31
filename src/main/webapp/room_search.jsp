@@ -127,7 +127,7 @@
         }
 
         String searchTokenDate = "not exists( " +
-                        "select booking_id from booking where room_number = room.room_number and hotel_address = room.hotel_address" +
+                        "select book_rent_id from bookingandrenting where room_number = room.room_number and hotel_address = room.hotel_address" +
                             " and from_date <= '" + endDate + "'" +
                             " and to_date >= '" + startDate + "')";
         where.add(searchTokenDate);
@@ -136,7 +136,8 @@
         whereArray = where.toArray(whereArray);
         String whereClause = String.join(" AND ", whereArray);
         System.out.println(whereClause);
-        String query = "SELECT * FROM room LEFT OUTER JOIN hotel ON room.hotel_address = hotel.address WHERE " + whereClause;
+        String query = "SELECT * FROM room LEFT OUTER JOIN hotel ON room.hotel_address = hotel.address WHERE " +
+                        whereClause + " ORDER BY hotel_address, room_number";
         System.out.println(query);
 
         try {

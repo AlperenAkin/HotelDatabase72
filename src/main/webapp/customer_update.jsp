@@ -65,7 +65,7 @@
         String customer_id = request.getParameter("customer_id");
         String first_name = request.getParameter("first_name");
         String last_name = request.getParameter("last_name");
-        String email = request.getParameter("email");
+        String address = request.getParameter("address");
         String date_registered = request.getParameter("date_registered");
 
 
@@ -76,7 +76,7 @@
     <div class="container">
         <div class="row" id="row">
             <div class="col-md-12">
-                <form class="form-horizontal" name="hotel-creation-form" action="employee_update_controller.jsp" method="POST">
+                <form class="form-horizontal" name="hotel-creation-form" action="customer_update_controller.jsp" method="POST">
 
                     <div class="form-group col-sm-3 mb-3">
                         <label for="customer_id">CustomerID</label>
@@ -99,13 +99,13 @@
 
                     <div class="form-group col-sm-3 mb-3">
                         <label for="email">Email</label>
-                        <input type="text" class="form-control" name="email" placeholder="Enter email"
-                        value="<%=first_name%>">
+                        <input type="text" class="form-control" name="address" placeholder="Enter email"
+                        value="<%=address%>">
                     </div>
                     <div class="form-group col-sm-3 mb-3">
                         <label for="date_registered">Date Registered</label>
                         <input type="date" class="form-control" name="date_registered" placeholder="Enter date"
-                        value="<%=first_name%>">
+                        value="<%=date_registered%>">
 
                     </div>
 

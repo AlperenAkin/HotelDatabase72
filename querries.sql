@@ -311,61 +311,130 @@ SELECT room_number, price, capacity
 FROM Room
 WHERE extendable = TRUE AND hotel_address = '505 Forest Parkway, Whistler, BC';
 
---4 Total Number of Rooms Across All Hotels:
-SELECT COUNT(*) AS total_rooms
-FROM Room;
+--4 USED DURING SEARCH IN WEB APP(Nested): Rooms that are not booked between a specific date from a specific hotel chain and a specific capacity:
+SELECT * FROM room LEFT OUTER JOIN hotel ON room.hotel_address = hotel.address
+WHERE exists( select address from hotel h where h.address = room.hotel_address and h.hotel_chain_name = 'Pacific Coast Inns')
+AND capacity = 4 AND not exists( select booking_id from booking
+where room_number = room.room_number and hotel_address = room.hotel_address and from_date <= '2024-03-21' and to_date >= '2024-03-06')
+8
 
---TRIGGERS *****have to change this***
-CREATE TRIGGER after_room_insert
-AFTER INSERT ON Room
-FOR EACH ROW
-BEGIN
-  INSERT INTO RoomLog (operation, room_number, hotel_address, log_date)
-  VALUES ('INSERT', NEW.room_number, NEW.hotel_address, CURRENT_TIMESTAMP);
-END;
+--5 useful query, select all bookings by a specific customer
+SELECT *
+FROM Booking
+WHERE customer_id = 1;
 
-CREATE TRIGGER after_room_delete
-AFTER DELETE ON Room
-FOR EACH ROW
-BEGIN
-  INSERT INTO RoomLog (operation, room_number, hotel_address, log_date)
-  VALUES ('DELETE', OLD.room_number, OLD.hotel_address, CURRENT_TIMESTAMP);
-END;
 
-CREATE TRIGGER after_room_update
-AFTER UPDATE ON Room
-FOR EACH ROW
-BEGIN
-  INSERT INTO RoomLog (operation, room_number, hotel_address, log_date)
-  VALUES ('UPDATE', NEW.room_number, NEW.hotel_address, CURRENT_TIMESTAMP);
-END;
 
-CREATE TRIGGER before_hotel_chain_delete
-BEFORE DELETE ON Hotel_Chain
-FOR EACH ROW
+--TRIGGERS
+
+--TRIGGER#1
+--prevent deletion of a hotel if there are associated rooms
+CREATE OR REPLACE FUNCTION prevent_hotel_deletion()
+RETURNS TRIGGER AS $$
 BEGIN
-  IF (SELECT COUNT(*) FROM Hotel WHERE hotel_chain_name = OLD.name) > 0 THEN
-    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cannot delete hotel chain with existing hotels';
-  END IF;
+    -- Check if there are any rooms associated with the hotel
+    IF EXISTS (SELECT 1 FROM Room WHERE hotel_address = OLD.address) THEN
+        RAISE EXCEPTION 'Cannot delete hotel: there are rooms associated with it.';
+    END IF;
+    RETURN OLD;
 END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER check_hotel_deletion
+BEFORE DELETE ON Hotel
+FOR EACH ROW EXECUTE FUNCTION prevent_hotel_deletion();
+
+--TRIGGER #2
+--room capacity does not exceed a maximum limit
+CREATE OR REPLACE FUNCTION check_room_capacity()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Define the maximum allowed capacity which is 10
+    IF NEW.capacity > 10 THEN
+        RAISE EXCEPTION 'Room capacity exceeds the maximum limit of 10.';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Trigger for Room Insertion to check capacity
+CREATE TRIGGER verify_room_capacity_before_insert
+BEFORE INSERT ON Room
+FOR EACH ROW EXECUTE FUNCTION check_room_capacity();
+
+-- Trigger for Room Update to check capacity
+CREATE TRIGGER verify_room_capacity_before_update
+BEFORE UPDATE ON Room
+FOR EACH ROW EXECUTE FUNCTION check_room_capacity();
+
+--TRIGGER #3
+-- prevent the deletion of a customer, if that customer has a booking
+CREATE OR REPLACE FUNCTION prevent_customer_deletion_if_booking_exists()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Check if the customer has any bookings
+    IF EXISTS (SELECT 1 FROM Booking WHERE customer_id = OLD.customer_id) THEN
+        RAISE EXCEPTION 'Cannot delete customer: they have existing bookings.';
+    END IF;
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER check_customer_booking_before_deletion
+BEFORE DELETE ON Customer
+FOR EACH ROW EXECUTE FUNCTION prevent_customer_deletion_if_booking_exists();
+
 
 --INDEXES
+CREATE INDEX idx_room_hotel_address ON Room (hotel_address);
+--help in speeding up queries that filter or join on the hotel_address.
+--For example, in room_search.jsp page, when we search for rooms in a specific hotel,
+--the query will be faster if we have an index on hotel_address.
+CREATE INDEX idx_booking_customer_id ON Booking (customer_id);
+--useful for queries that involve searching, filtering, or joining on the customer_id.
+--For example, when we want to display all bookings made by a specific customer, the query will be faster if we have an index on customer_id.
+CREATE INDEX idx_booking_dates ON Booking (from_date, to_date);
+--optimize queries involving date ranges, which is used in room_search when we run the NOT EXIST (from_date) (to_date) query.
 
---1 This index will accelerate queries that involve searching, joining, or filtering
---  operations based on the hotel address in the Room table, such as finding all rooms
---  belonging to a specific hotel.
 
-CREATE INDEX idx_room_hotel_address ON Room(hotel_address);
+--VIEWS
+--view #1 available rooms ber province
+CREATE VIEW AvailableRoomsPerProvince AS
+SELECT
+    split_part(Hotel.address, ', ', 3) AS province,
+    COUNT(*) AS available_rooms
+FROM
+    Hotel
+JOIN
+    Room ON Hotel.address = Room.hotel_address
+GROUP BY
+    province;
 
---2 This index is useful for queries that involve looking up all hotels belonging to a particular chain, enhancing
---  performance when dealing with aggregations, joins, or searches based on hotel chains.
+SELECT * FROM AvailableRoomsPerProvince WHERE province = 'BC';
 
-CREATE INDEX idx_hotel_chain_name ON Hotel(hotel_chain_name);
 
---3 This index supports efficient execution of queries that filter rooms by price, such as finding rooms within a
---  specific budget or comparing room prices. It is particularly useful for range queries on room rates.
+--view #2 aggregated capacity of all rooms of a specific hotel
+CREATE VIEW TotalRoomCapacityPerHotel AS
+SELECT hotel_address, SUM(capacity) AS total_capacity
+FROM Room
+GROUP BY hotel_address;
 
-CREATE INDEX idx_room_price ON Room(price);
+SELECT * FROM TotalRoomCapacityPerHotel WHERE hotel_address = '1 Maple Lane, Toronto, ON';
+
+--view #3 list bookings and rentings together (use B and R to categorize them in the view)
+
+CREATE VIEW BookingAndRenting AS
+SELECT b.booking_id as book_rent_id, 'B' as book_or_rent, b.customer_id, b.room_number, b.hotel_address, b.from_date, b.to_date
+  from booking as b
+UNION
+SELECT r.renting_id as book_rent_id, 'R' as book_or_rent, r.customer_id, r.room_number, r.hotel_address, r.from_date, r.to_date
+ from renting as r
+
+ select * from bookingandrenting;
+
+
+
+
 
 
 

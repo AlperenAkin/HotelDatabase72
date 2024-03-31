@@ -47,10 +47,10 @@
 
     <div class="main-content">
         <h2>How would you like to proceed?</h2>
-        <a href="hotels.jsp" class="btn">Hotels</a>
-        <a href="rooms.jsp" class="btn">Rooms</a>
-        <a href="employees.jsp" class="btn">Employees</a>
-        <a href="customers.jsp" class="btn">Customers</a>
+        <a href="hotels.jsp" class="btn">Edit Hotels</a>
+        <a href="rooms.jsp" class="btn">Edit Rooms</a>
+        <a href="employees.jsp" class="btn">Edit Employees</a>
+        <a href="customers.jsp" class="btn">Edit Customers</a>
         <a href="bookings.jsp" class="btn">Convert Booking to Renting</a>
 
     </div>

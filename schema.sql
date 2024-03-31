@@ -25,7 +25,7 @@ CREATE TABLE Hotel_Chain (
 -- Hotel Table
 CREATE TABLE Hotel (
     address VARCHAR(255) PRIMARY KEY,
-    stars INT,
+    stars INT CHECK (star_rating BETWEEN 1 AND 5),
     contact_email VARCHAR(255),
     num_rooms INT,
     hotel_chain_name VARCHAR(255),
@@ -107,7 +107,7 @@ CREATE TABLE Room (
   hotel_address VARCHAR(255),
   room_number INT,
   price DECIMAL(10, 2),
-  capacity INT,
+  capacity INT INT CHECK (capacity > 0),
   view VARCHAR(50),
   extendable BOOLEAN,
   PRIMARY KEY (hotel_address, room_number),
